@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { MenuIcon } from "../Icon/Icon";
+import { BasicMenu } from "../materialUI/BasicMenu";
 import { Navbar } from "./Navbar/Navbar";
 
 export const Header = () => {
@@ -28,7 +28,7 @@ export const Header = () => {
         height={0}
       />
       {windowBigger && <Navbar />}
-      {windowSmaller && <MenuIcon className="ml-5 w-8 cursor-pointer" />}
+      {windowSmaller && <BasicMenu className="w-9 object-cover text-white" />}
     </div>
   );
 };

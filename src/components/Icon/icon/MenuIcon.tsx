@@ -1,5 +1,7 @@
 //https://www.iconfinder.com/icons/8665130/bars_data_icon
 
+"use client";
+
 export const MenuIcon = ({ color = "currentColor", className = "" }) => {
   return (
     <svg

@@ -8,10 +8,12 @@ const ListItem = ({ children, href }: { children: string; href: string }) => {
   );
 };
 
-export const Navbar = () => {
+export const Navbar = ({ className }: { className?: string }) => {
   return (
     <nav className="w-full">
-      <ul className="flex md:flex-row flex-col flex-wrap gap-1 items-center justify-center text-sm font-semibold">
+      <ul
+        className={`flex md:flex-row flex-col flex-wrap gap-1 items-center justify-center text-sm font-semibold ${className}`}
+      >
         <ListItem href="/">HOME</ListItem>
         <ListItem href="/sobre-nos">SOBRE NÓS</ListItem>
         <ListItem href="/publicacoes">PUBLICAÇÕES</ListItem>
