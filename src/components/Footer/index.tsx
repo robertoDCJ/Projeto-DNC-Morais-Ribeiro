@@ -9,7 +9,7 @@ export const Footer = () => {
             <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
                 <div className="md:flex md:justify-between items-center">
                     <div className="ml-4"> 
-                        <Image src={logo} alt="aqui o logo" width={300} height={100} />
+                        <Image src={logo} alt="Logo Morais & Ribeiro" width={300} height={100} />
                     </div>
                     <div className="hidden md:block w-8"></div>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mx-auto">
