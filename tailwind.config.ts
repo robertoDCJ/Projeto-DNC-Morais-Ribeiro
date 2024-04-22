@@ -8,12 +8,19 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      height: {
+        "659": "659px",
       },
-      
+      width: {
+        "456": "456px",
+        "300": "300px",
+      },
+      fontFamily: {
+        Alegreya: "Alegreya, serif",
+      },
+      fontSize: {
+        "42": "42px",
+      },
     },
   },
   plugins: [],
