@@ -1,4 +1,6 @@
 import { Footer, Header, WhatsAppButton } from "@/components";
+import ControlledCarousel from "@/components/ContolledCarousel/ControlledCarousel";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -19,6 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Header />
+        <ControlledCarousel/>
         {children}
         <Footer />
         <WhatsAppButton />
