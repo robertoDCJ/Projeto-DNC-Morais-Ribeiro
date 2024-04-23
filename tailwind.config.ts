@@ -13,10 +13,11 @@ const config: Config = {
       },
       width: {
         "456": "456px",
-        "300": "300px",
+        "250": "250px",
       },
       fontFamily: {
         Alegreya: "Alegreya, serif",
+        Lato: "Lato, sans-serif",
       },
       fontSize: {
         "42": "42px",

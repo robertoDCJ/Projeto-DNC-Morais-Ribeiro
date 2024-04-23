@@ -1,3 +1,7 @@
-export default function Page() {
-  return <div>Privacidade</div>;
+export default function Privacidade() {
+  return (
+    <div>
+      <h1>Privacidade</h1>
+    </div>
+  );
 }

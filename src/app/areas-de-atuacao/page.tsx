@@ -1,3 +1,7 @@
-export default function Page() {
-  return <div>Áreas de Atuação</div>;
+export default function AreasAtuacao() {
+  return (
+    <div>
+      <h1>Áreas de Atuação</h1>
+    </div>
+  );
 }
