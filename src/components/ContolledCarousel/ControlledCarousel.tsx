@@ -28,18 +28,41 @@ export const ControlledCarousel = ({ children }: CarouselProps) => {
         <Carousel.Item>
           <ImgCarousel
             style={{
-              backgroundImage:
-                "url('/img1.svg'), linear-gradient(to bottom, transparent 0%, #000 100%)",
+              backgroundImage: "url('/img1.svg')",
             }}
           ></ImgCarousel>
         </Carousel.Item>
 
         <Carousel.Item>
-          <ImgCarousel />
+          <ImgCarousel
+            style={{
+              backgroundImage: "url('/img2.svg')",
+            }}
+          />
         </Carousel.Item>
 
         <Carousel.Item>
-          <ImgCarousel />
+          <ImgCarousel
+            style={{
+              backgroundImage: "url('/img3.svg')",
+            }}
+          />
+        </Carousel.Item>
+
+        <Carousel.Item>
+          <ImgCarousel
+            style={{
+              backgroundImage: "url('/img4.svg')",
+            }}
+          />
+        </Carousel.Item>
+
+        <Carousel.Item>
+          <ImgCarousel
+            style={{
+              backgroundImage: "url('/img5.svg')",
+            }}
+          />
         </Carousel.Item>
       </Carousel>
     </div>
