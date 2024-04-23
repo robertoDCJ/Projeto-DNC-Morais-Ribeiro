@@ -5,7 +5,9 @@ import { useEffect, useState } from "react";
 import { BasicMenu } from "../materialUI/BasicMenu";
 import { Navbar } from "./Navbar/Navbar";
 
-export const Header = () => {
+type HeaderProps = React.ComponentProps<"div">;
+
+export const Header = ({ className, ...props }: HeaderProps) => {
   const [windowSize, setWindowSize] = useState(0);
 
   useEffect(() => {
@@ -26,7 +28,10 @@ export const Header = () => {
   const windowSmaller = windowSize <= 768;
 
   return (
-    <div className="flex flex-row md:px-8 px-4 items-center md:justify-between justify-center">
+    <div
+      className={`flex flex-row md:px-8 px-4 items-center md:justify-between justify-center bg-black ${className}`}
+      {...props}
+    >
       <Image
         src="/logo.svg"
         alt="Logo Escritório de Advocacia Morais & Ribeiro"
