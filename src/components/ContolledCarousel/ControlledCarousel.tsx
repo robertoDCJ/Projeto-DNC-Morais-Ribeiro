@@ -8,10 +8,7 @@ type CarouselProps = React.ComponentProps<"div">;
 
 function ImgCarousel({ ...props }: ImgCarouselProps) {
   return (
-    <div
-      className="filter brightness-75 border bg-cover bg-center flex h-659 w-full"
-      {...props}
-    ></div>
+    <div className="bg-cover bg-center flex h-659 w-full" {...props}></div>
   );
 }
 

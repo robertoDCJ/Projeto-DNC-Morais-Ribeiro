@@ -1,3 +1,4 @@
+export { Banner } from "./Banner/Banner";
 export { WhatsAppButton } from "./Button/WhatsAppButton";
 export { ControlledCarousel } from "./ContolledCarousel/ControlledCarousel";
 export { Footer } from "./Footer/Footer";
