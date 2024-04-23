@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`bg-black text-white ${inter.className}`}>
-        <Header />
+        <Header className="sticky top-0" />
         {children}
         <Footer />
         <WhatsAppButton />
