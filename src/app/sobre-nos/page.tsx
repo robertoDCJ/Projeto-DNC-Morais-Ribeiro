@@ -2,7 +2,7 @@ import { Banner } from "@/components";
 
 export default function SobreNos() {
   return (
-    <Banner style={{ backgroundImage: "url('/img2.svg')" }}>
+    <Banner style={{ backgroundImage: "url('/img1.png')" }}>
       <h2 className="md:text-2xl text-base font-bold antialiased">
         Confie em nós para representar seus interesses com paixão,
         profissionalismo e comprometimento.
