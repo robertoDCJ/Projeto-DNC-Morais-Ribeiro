@@ -28,7 +28,7 @@ export const ControlledCarousel = ({ children }: CarouselProps) => {
         <Carousel.Item>
           <ImgCarousel
             style={{
-              backgroundImage: "url('/img1.svg')",
+              backgroundImage: "url('/img1.png')",
             }}
           ></ImgCarousel>
         </Carousel.Item>
@@ -36,7 +36,7 @@ export const ControlledCarousel = ({ children }: CarouselProps) => {
         <Carousel.Item>
           <ImgCarousel
             style={{
-              backgroundImage: "url('/img2.svg')",
+              backgroundImage: "url('/img2.png')",
             }}
           />
         </Carousel.Item>
@@ -44,7 +44,7 @@ export const ControlledCarousel = ({ children }: CarouselProps) => {
         <Carousel.Item>
           <ImgCarousel
             style={{
-              backgroundImage: "url('/img3.svg')",
+              backgroundImage: "url('/img3.png')",
             }}
           />
         </Carousel.Item>
@@ -52,7 +52,7 @@ export const ControlledCarousel = ({ children }: CarouselProps) => {
         <Carousel.Item>
           <ImgCarousel
             style={{
-              backgroundImage: "url('/img4.svg')",
+              backgroundImage: "url('/img4.png')",
             }}
           />
         </Carousel.Item>
@@ -60,7 +60,7 @@ export const ControlledCarousel = ({ children }: CarouselProps) => {
         <Carousel.Item>
           <ImgCarousel
             style={{
-              backgroundImage: "url('/img5.svg')",
+              backgroundImage: "url('/img5.png')",
             }}
           />
         </Carousel.Item>
