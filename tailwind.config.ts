@@ -8,12 +8,33 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      animation: {
+        slide: 'slide 5s ease-in-out infinite',
       },
-      
+      keyframes: {
+        slide: {
+          '0%': { backgroundPosition: '0 0' },
+          '100%': { backgroundPosition: '100% 0' },
+        },
+      },
+      gridTemplateColumns: {
+        "auto-fit": "repeat(auto-fit, minmax(375px, 1fr))",
+      },
+      height: {
+        "659": "659px",
+        "620": "620px",
+      },
+      width: {
+        "456": "456px",
+        "250": "250px",
+      },
+      fontFamily: {
+        Alegreya: "Alegreya, serif",
+        Lato: "Lato, sans-serif",
+      },
+      fontSize: {
+        "42": "42px",
+      },
     },
   },
   plugins: [],
