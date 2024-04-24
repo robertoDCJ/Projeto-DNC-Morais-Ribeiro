@@ -2,6 +2,7 @@ import { Footer, Header, WhatsAppButton } from "@/components";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import SectionHome from "./section-home/page";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,6 +21,7 @@ export default function RootLayout({
       <body className={`bg-black text-white ${inter.className}`}>
         <Header className="sticky top-0 z-50" />
         {children}
+        <SectionHome/>
         <Footer />
         <WhatsAppButton />
       </body>
