@@ -2,14 +2,14 @@ import Image from "next/image";
 import pessoas from "../../../public/pessoas.jpg";
 import escritorio from "../../../public/escritorio.svg";
 
-const SectionHome = () => {
+ const SectionHome = () => {
   return (
     <>
       <section 
       className="relative ">
         <div 
-        className="absolute top-0 right-0 text-white py-4 px-8 w-96" 
-        style={{ backgroundColor: '#535353' }}>
+        className="top-0 right-8 text-white py-4 px-8 w-96" 
+        style={{ backgroundColor: '#535353', position: 'absolute', top: 0, right: 'calc(50% - 42rem)' }}>
           <h2 
           className="text-center font-Alegreya text-xl font-serif">
               TRANSPARÊNCIA TOTAL

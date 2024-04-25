@@ -1,4 +1,5 @@
 import { ControlledCarousel } from "@/components";
+import SectionHome from "@/components/section-home/page";
 
 export default function Home() {
   return (
@@ -23,7 +24,7 @@ export default function Home() {
           para trabalhar juntos na busca por soluções eficazes e justas.
         </p>
       </ControlledCarousel>
-      <h1>Home</h1>
+      <SectionHome/>
     </div>
   );
 }
