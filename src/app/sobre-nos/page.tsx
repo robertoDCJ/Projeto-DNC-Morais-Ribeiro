@@ -1,60 +1,206 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
-export default function SobreNos ()  {
-
+export default function SobreNos() {
   const [isAnimationActive, setIsAnimationActive] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsAnimationActive(window.innerWidth <= 600); // Activa la animación cuando la pantalla es más pequeña que 375px
+      setIsAnimationActive(window.innerWidth <= 600);
     };
 
-    window.addEventListener('resize', handleResize);
-    handleResize(); // Llama a la función de manejo de tamaño al cargar la página
+    window.addEventListener("resize", handleResize);
+    handleResize();
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
   return (
-    
-      <div className="flex flex-col justify-center">
-        <div className={`flex justify-center ${isAnimationActive? 'animate-slide' : 'bg-center'}`} style={{backgroundImage: "url('/ImgSobreNos.svg')", height:"659px", backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}>
-          <div className="flex md:w-456 md:justify-start justify-center items-center" style={{width: "1000px"}}>
-            <div className="flex flex-col md:w-456  w-250">
-                <h1 className="font-Alegreya md:text-3xl text-xl  font-bold ">
-                  Confie em nós para representar seus interesses com paixão,
-                  profissionalismo e comprometimento.
-                </h1>
-                <div className="border border-white my-3 antialiased"/>
-                <p className="font-Lato">
-                Confie em nós para representar seus interesses com paixão, profissionalismo e 
-                comprometimento. Somos um escritório de atuação full service, 360º, adaptando,
-                entendendo e acolhendo cada cliente com sua respectiva demanda.
-
-                Profissionais altamente qualificados e especializados em diversas áreas do direito,
-                o Dr. Gustavo Santos Ribeiro possui vasta experiência em responsabilidade civil, 
-                direito do consumidor e isenção de imposto de renda em casos de doença 
-                grave;acolhendo cada cliente com sua respectiva demanda.
-                </p>  
+    <div className="flex flex-col justify-center">
+      <div
+        className={`flex justify-center ${
+          isAnimationActive ? "animate-slide" : "bg-center"
+        }`}
+        style={{
+          backgroundImage: "url('/ImgSobreNos/Equipe.svg')",
+          height: "659px",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+        }}
+      >
+        <div
+          className="flex md:w-456 md:justify-start justify-center items-center"
+          style={{ width: "1000px" }}
+        >
+          <div className="flex flex-col md:w-456  w-250">
+            <h1 className="font-Alegreya md:text-3xl text-xl  font-bold ">
+              Confie em nós para representar seus interesses com paixão,
+              profissionalismo e comprometimento.
+            </h1>
+            <div className="border border-white my-3 antialiased" />
+            <p className="font-Lato">
+              Confie em nós para representar seus interesses com paixão,
+              profissionalismo e comprometimento. Somos um escritório de atuação
+              full service, 360º, adaptando, entendendo e acolhendo cada cliente
+              com sua respectiva demanda. Profissionais altamente qualificados e
+              especializados em diversas áreas do direito, o Dr. Gustavo Santos
+              Ribeiro possui vasta experiência em responsabilidade civil,
+              direito do consumidor e isenção de imposto de renda em casos de
+              doença grave;acolhendo cada cliente com sua respectiva demanda.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="grid gap-12">
+        <div
+          className="grid place-items-center"
+          style={{ backgroundImage: "url('/ImgSobreNos/BackgroundGrey.svg')" }}
+        >
+          <div className="grid max-w-[806px]">
+            <div className="grid grid-cols-auto-fit text-black gap-12 pt-8 pb-8">
+              <h1 className=" font-Alegreya font-bold text-4xl">
+                Nossa missão é guiar cada interação com nossos clientes.
+              </h1>
+              <p className="font-Lato font-normal">
+                Na Morais & Ribeiro Advocacia e Consultoria Jurídica, nossa
+                missão é conduzida por três pilares fundamentais: foco,
+                conhecimento e inovação. Estamos comprometidos em fornecer
+                soluções jurídicas e de negócios que transcendam as expectativas
+                de nossos clientes e desafiem os paradigmas tradicionais da
+                advocacia.
+              </p>
             </div>
           </div>
         </div>
-      
-      <div className="grid  justify-center" style={{backgroundImage: "url('/BackgroundSobreNos.svg')" }}>
-        <div className="grid content-center max-w-[806px]">
-            <div className="grid grid-cols-auto-fit text-black  gap-x-8 gap-y-8 pt-8 pb-8 ">
-                <h1 className=" font-Alegreya font-bold text-4xl"> Nossa missão é guiar cada interação com nossos clientes.</h1>
-                <p className="font-Lato font-normal"> Na Morais & Ribeiro Advocacia e Consultoria Jurídica, nossa missão é conduzida por três pilares fundamentais: foco, conhecimento e inovação.
-                    Estamos comprometidos em fornecer soluções jurídicas e de negócios que transcendam as expectativas de nossos clientes e desafiem os paradigmas tradicionais da advocacia.</p>
-            </div>
-        </div>
-    </div>
 
-      {/* <h1>Sobre Nós</h1> */}
+        <div className="grid place-items-center  gap-12 bg-black">
+          <div className="grid justify-center max-w-[806px]">
+            <div className="grid grid-cols-auto-fit gap-12 ">
+              <p className="font-Lato font-normal">
+                Na Morais & Ribeiro Advocacia e Consultoria Jurídica, temos o
+                compromisso de seguir princípios fundamentais do Direito, que
+                guiam cada interação com nossos clientes. Valorizamos a
+                confiança depositada em nossa equipe e buscamos construir
+                relacionamentos duradouros, por meio da satisfação do cliente,
+                sempre baseados na transparência, ética e excelência jurídica.
+              </p>
+
+              <h1 className="font-Alegreya font-bold text-4xl">
+                Cultivar relacionamentos sólidos, baseados na transparência,
+                ética e excelência jurídica
+              </h1>
+            </div>
+          </div>
+          <div className="grid place-items-center">
+            <div
+              className="grid place-items-center gap-12"
+              style={{ maxWidth: "1280px" }}
+            >
+              <div className="grid place-items-start w-full">
+                <div className=" w-4/5 border border-white" />
+              </div>
+              <div className="grid grid-cols-auto-fit text-end gap-12">
+                <div className="grid place-items-center">
+                  <img className="h-full rounded-2xl" src="/ImgSobreNos/ImgTransparencia.jpeg"/>
+                </div>
+                <div className="grid gap-12">
+                  <h1
+                    className="text-center bg-zinc-600 text-2xl"
+                    style={{ marginLeft: "20%" }}
+                  >
+                    TRANSPARÊNCIA TOTAL
+                  </h1>
+                  <p
+                    className="text-start"
+                    style={{ marginLeft: "10%", marginRight: "10%" }}
+                  >
+                    Acreditamos que a transparência é essencial para qualquer
+                    relação sólida. Na Morais & Ribeiro, comprometemo-nos a
+                    fornecer informações claras e compreensíveis sobre os
+                    processos legais e seus possíveis desdobramentos. Buscamos
+                    eliminar barreiras na comunicação jurídica, garantindo que
+                    nossos clientes estejam sempre informados e capacitados a
+                    tomar decisões.
+                  </p>
+                </div>
+              </div>
+              <div className="grid grid-rows-auto gap-12">
+                <h1
+                  className="text-center bg-zinc-600 text-2xl"
+                  style={{ width: "375px" }}
+                >
+                  SOLUÇÕES EFICAZES
+                </h1>
+                <p style={{ marginRight: "30%", marginLeft: "10%" }}>
+                  {" "}
+                  Entendemos que cada situação jurídica é única, e abordamos
+                  cada caso com uma perspectiva personalizada. Nosso objetivo
+                  não é apenas resolver conflitos, mas fazê-lo de maneira
+                  efetiva, rápida e justa. Empregamos estratégias inovadoras,
+                  aliadas à nossa experiência, para encontrar soluções que
+                  atendam aos interesses de nossos clientes.
+                </p>
+              </div>
+              <div className="grid grid-cols-auto-fit text-end gap-12">
+                <div></div>
+                <div className="grid gap-12">
+                  <h1
+                    className="text-center bg-zinc-600 text-2xl"
+                    style={{ marginLeft: "20%" }}
+                  >
+                    EMPATIA E COMPROMETIMENTO
+                  </h1>
+                  <p
+                    className="text-start"
+                    style={{ marginLeft: "10%", marginRight: "10%" }}
+                  >
+                    {" "}
+                    No coração do nosso serviço está a empatia. Compreendemos as
+                    complexidades emocionais e legais que envolvem questões
+                    jurídicas e nos comprometemos a lidar com cada cliente com
+                    respeito, empatia e compreensão. Estamos aqui para ouvir,
+                    aconselhar e agir em prol do melhor interesse de quem confia
+                    em nossa expertise.
+                  </p>
+                </div>
+              </div>
+              <div className="grid grid-rows-auto gap-12">
+                <div className="grid place-items-end w-full">
+                  <div className=" w-4/5 border border-white" />
+                </div>
+                <div
+                  className="grid place-items-start grid-rows-auto gap-12"
+                  style={{ marginLeft: "10%" }}
+                >
+                  <h1 className="text-center text-2xl">Visão</h1>
+                  <p className="text-start" style={{ marginRight: "40%" }}>
+                    {" "}
+                    Uma Sociedade de Advogados alinhada às transformações
+                    sociais e seus reflexos nas dinâmicas jurídicas, adotando e
+                    adaptando-se às inovações tecnológicas em constante
+                    evolução.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="grid place-items-center text-black" style={{ backgroundImage: "url('/ImgSobreNos/BackgroundGrey.svg')" }}>
+          <div className="grid gap-12 pb-8 pt-8 text-center" style={{maxWidth: "1280px"}}>
+            <h1 className=" text-5xl font-bold">
+              Descubra as maneiras pelas quais podemos apoiar a sua causa!
+            </h1>
+            <div className="grid place-items-center grid-cols-auto-fit1 gap-12">
+              <img src="/ImgSobreNos/Cards/Consumidor.svg" alt="Card-Consumidor" />
+              <img src="/ImgSobreNos/Cards/Trabalhista.svg" alt="Card-Trabalista" />
+              <img src="/ImgSobreNos/Cards/Tributario.svg" alt="Card-Tributario" />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
-

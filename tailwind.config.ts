@@ -19,6 +19,7 @@ const config: Config = {
       },
       gridTemplateColumns: {
         "auto-fit": "repeat(auto-fit, minmax(375px, 1fr))",
+        "auto-fit1": "repeat(auto-fit, minmax(308px, 1fr))",
       },
       height: {
         "659": "659px",
