@@ -24,5 +24,5 @@ export function handler(request: NextRequest) {
  
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: '/api/artigo/:path*',
+  matcher: '/artigo/:path*',
 }
