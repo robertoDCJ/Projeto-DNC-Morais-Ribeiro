@@ -37,19 +37,18 @@ export default function SobreNos() {
         >
           <div className="flex flex-col md:w-456  w-250">
             <h1 className="font-Alegreya md:text-3xl text-xl  font-bold ">
-              Confie em nós para representar seus interesses com paixão,
-              profissionalismo e comprometimento.
+            Somos um escritório de advocacia composto por três colegas de faculdade que cultivaram uma relação sólida desde os bancos acadêmicos!
             </h1>
             <div className="border border-white my-3 antialiased" />
-            <p className="font-Lato">
-              Confie em nós para representar seus interesses com paixão,
-              profissionalismo e comprometimento. Somos um escritório de atuação
-              full service, 360º, adaptando, entendendo e acolhendo cada cliente
-              com sua respectiva demanda. Profissionais altamente qualificados e
-              especializados em diversas áreas do direito, o Dr. Gustavo Santos
-              Ribeiro possui vasta experiência em responsabilidade civil,
-              direito do consumidor e isenção de imposto de renda em casos de
-              doença grave;acolhendo cada cliente com sua respectiva demanda.
+            <p className="font-Lato leading-tight">
+            Nossa sociedade nasceu da visão compartilhada de oferecer serviços jurídicos de excelência, moldados pela experiência adquirida
+            ao longo de nossos anos de estudo e prática. Profissionais altamente qualificados e especializados em diversas áreas do direito, 
+            o Dr. Gustavo Santos Ribeiro possui vasta experiência em responsabilidade civil, direito do consumidor e isenção de imposto de renda
+             em casos de doença grave; O Dr. João Pedro Ribeiro destaca-se na esfera trabalhista, com expertise em compliance, danos morais e LGPD;
+               e a Dra. Nikolly Karoline Morais e Silva é especializada em Advocacia Cível e Direito Tributário, com ênfase em negociação, contratos 
+               e resolução de conflitos. Nosso compromisso é oferecer assistência jurídica de alta qualidade, eficiente e adaptada às necessidades
+                únicas de cada cliente.
+
             </p>
           </div>
         </div>
@@ -108,7 +107,7 @@ export default function SobreNos() {
                 </div>
                 <div className="grid gap-12">
                   <h1
-                    className="text-center bg-zinc-600 text-2xl"
+                    className="text-center bg-zinc-600 text-2xl font-Alegreya font-bold"
                     style={{ marginLeft: "20%" }}
                   >
                     TRANSPARÊNCIA TOTAL
@@ -129,7 +128,7 @@ export default function SobreNos() {
               </div>
               <div className="grid grid-rows-auto gap-12">
                 <h1
-                  className="text-center bg-zinc-600 text-2xl"
+                  className="text-center bg-zinc-600 text-2xl font-Alegreya font-bold"
                   style={{ width: "375px" }}
                 >
                   SOLUÇÕES EFICAZES
@@ -148,7 +147,7 @@ export default function SobreNos() {
                 <div></div>
                 <div className="grid gap-12">
                   <h1
-                    className="text-center bg-zinc-600 text-2xl"
+                    className="text-center bg-zinc-600 text-2xl font-Alegreya font-bold"
                     style={{ marginLeft: "20%" }}
                   >
                     EMPATIA E COMPROMETIMENTO
@@ -175,7 +174,7 @@ export default function SobreNos() {
                   className="grid place-items-start grid-rows-auto gap-12"
                   style={{ marginLeft: "10%" }}
                 >
-                  <h1 className="text-center text-2xl">Visão</h1>
+                  <h1 className="text-center text-2xl font-Alegreya font-bold">Visão</h1>
                   <p className="text-start" style={{ marginRight: "40%" }}>
                     {" "}
                     Uma Sociedade de Advogados alinhada às transformações
@@ -190,10 +189,10 @@ export default function SobreNos() {
         </div>
         <div className="grid place-items-center text-black" style={{ backgroundImage: "url('/ImgSobreNos/BackgroundGrey.svg')" }}>
           <div className="grid gap-12 pb-8 pt-8 text-center" style={{maxWidth: "1280px"}}>
-            <h1 className=" text-5xl font-bold">
+            <h1 className=" text-3xl font-bold font-Alegreya">
               Descubra as maneiras pelas quais podemos apoiar a sua causa!
             </h1>
-            <div className="grid place-items-center grid-cols-auto-fit1 gap-12">
+            <div className="flex justify-center items-center gap-12">
               <img src="/ImgSobreNos/Cards/Consumidor.svg" alt="Card-Consumidor" />
               <img src="/ImgSobreNos/Cards/Trabalhista.svg" alt="Card-Trabalista" />
               <img src="/ImgSobreNos/Cards/Tributario.svg" alt="Card-Tributario" />
