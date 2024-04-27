@@ -1,13 +1,36 @@
 import { Members } from "@/components/Members/Members";
 
-const data = {
-  name: "DRA. NIKOLLY KAROLINE MORAIS E SILVA ",
-  profession: "Advogada",
-  location: "São Paulo/SP",
-  email: "nikolly2@hotmail.com",
-  linkedin: "https://www.linkedin.com/in/juan-useche-79b395235/",
-  image: "/ImgMembers/Nikolly.svg",
-}
+const data = [
+  {
+    id: 1,
+    name: "DRA. NIKOLLY KAROLINE MORAIS E SILVA ",
+    profession: "Advogada",
+    location: "São Paulo/SP",
+    email: "nikolly2@hotmail.com",
+    linkedin: "https://www.linkedin.com/in/nikolly-morais-silva-4a7271169/",
+    image: "/ImgMembers/Nikolly.svg",
+  },
+
+  {
+    id: 2,
+    name: "DR. JOÃO PEDRO RIBEIRO",
+    profession: "Advogado",
+    location: "São Paulo/SP",
+    email: "j.pedro.resende@hotmail.com",
+    linkedin: "https://www.linkedin.com/in/joaopedrorrmoliveira/",
+    image: "/ImgMembers/Joao.svg",
+  },
+
+  {
+    id: 3,
+    name: "DR. GUSTAVO SANTOS RIBEIRO",
+    profession: "Advogado",
+    location: "São Paulo/SP",
+    email: "",
+    linkedin: "https://www.linkedin.com/in/gustavo-santos-ribeiro-31b652196/",
+    image: "/ImgMembers/Gustavo.svg",
+  },
+]
 
 
 export default function Equipe() {
@@ -21,7 +44,8 @@ export default function Equipe() {
         </div>
       </div>
       <div className="grid place-items-center" style={{backgroundColor: "white"}}>
-      <Members member={data}/>
+        {data.map(member => 
+        <Members key={member.id} member={member}/>)}
       </div>
     </div>
   );
