@@ -34,6 +34,9 @@ export default function SobreNos() {
       >
         <div
           className="flex pt-5 md:w-556 w-full items-start ml-5 mt-9"
+
+          style={{marginTop: '300px', marginLeft: '80px', marginRight: '80px'}}
+
         >
           <div className="flex flex-col md:w-856 sw-full">
             <h1 className="font-Alegreya md:text-3xl text-xl pt-11 font-bold ">
