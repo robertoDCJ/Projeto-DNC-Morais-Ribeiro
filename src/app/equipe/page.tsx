@@ -45,7 +45,9 @@ export default function Equipe() {
       </div>
       <div className="grid place-items-center" style={{backgroundColor: "white"}}>
         {data.map(member => 
-        <Members key={member.id} member={member}/>)}
+        <Members key={member.id} member={member} line={ member.id == 1? false : true}
+        />)}
+
       </div>
     </div>
   );

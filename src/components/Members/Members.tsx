@@ -11,24 +11,32 @@ type Member ={
     linkedin: string,
 };
 
-export const Members = ({member} : {member : Member}) => {
+
+export const Members = ({member, line} : {member : Member, line: boolean}) => {
   return (
     <div className="w-full max-w-screen-xl p-4">
-      <div className="grid grid-row-2 md:grid-cols-2 text-black">
+
+      {line &&
+      <div className="grid place-items-end">
+        <div className="border-black mb-5  border w-full"/>
+      </div>}
+
+      <div className="grid md:flex md:flex-row text-black">
+
         <div className="grid place-items-center">
           <img
             src={member.image}
             alt={`Imagen de ${member.name} `}
-            style={{ width: "436px" }}
+            style={{ maxWidth: "436px" }}
           />
         </div>
-        
+
         <div className="mt-5 p-3">
           <h1 className="font-Alegreya font-bold text-2xl border-b-2 mb-5 border-black">
             {member.name} 
           </h1>
 
-          <div className="flex flex-col gap-3 md:grid  md:grid-cols-2 break-all">
+          <div className="grid gap-3 md:grid  md:grid-cols-2 break-all">
 
             {member.profession &&
             <h1 className="font-Lato font-medium text-3xl">
