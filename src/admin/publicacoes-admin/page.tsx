@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Pagination from "@/components/Pagination/Pagination";
+import Link from "next/link";
 
-export default function Publicacoes() {
+export default function PublicacoesAdmin() {
   return (
     <>
       <main className="bg-gray-200">
@@ -28,7 +29,13 @@ export default function Publicacoes() {
         </div>
 
         <div className="flex justify-end items-end mt-4">
-      </div>
+            <Link href="/publicacoes-admin/novo-artigo">
+              <button 
+              className="bg-black text-white rounded-lg px-4 py-2 mr-4">
+                PUBLICAR ARTIGO
+              </button>
+            </Link>
+        </div>
 
         <div className="flex flex-col justify-start items-start p-4">
           <h1 className="font-Lato text-3xl text-black font-thin ml-8">
