@@ -28,18 +28,18 @@ export default function AreasAtuacao() {
   </div>
 
           <div className="flex flex-wrap justify-center items-center gap-12 p-8 mb-4">
-            <Link href="/areas-de-atuacao/direito-civil-geral">
+          <Link  href="/areas-de-atuacao/direito-do-consumidor">
               <img 
-              src="/ImgAreasDeAtuacao/miniaturas/direito-civil-geral.svg" 
-              alt="Direito-Geral" 
-              className="hover:shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer" 
+              src="/ImgAreasDeAtuacao/miniaturas/direito-do-consumidor.svg" 
+              alt="Direito-Do-Consumidor" 
+              className="hover:shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer"
               />
-            </Link>
+          </Link>
 
-            <Link href="/areas-de-atuacao/direito-de-familia">
+          <Link href="/areas-de-atuacao/direito-do-trabalho">
               <img 
-              src="/ImgAreasDeAtuacao/miniaturas/direito-de-familia.svg" 
-              alt="Diraito-Da-Familia"
+              src="/ImgAreasDeAtuacao/miniaturas/direito-do-trabalho.svg" 
+              alt="Direito-Do-Trabalho"
               className="hover:shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer" 
               />
             </Link>
@@ -62,19 +62,19 @@ export default function AreasAtuacao() {
               />
             </Link>
 
-            <Link href="/areas-de-atuacao/direito-do-trabalho">
+            <Link href="/areas-de-atuacao/direito-de-familia">
               <img 
-              src="/ImgAreasDeAtuacao/miniaturas/direito-do-trabalho.svg" 
-              alt="Direito-Do-Trabalho"
+              src="/ImgAreasDeAtuacao/miniaturas/direito-de-familia.svg" 
+              alt="Diraito-Da-Familia"
               className="hover:shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer" 
               />
             </Link>
 
-            <Link  href="/areas-de-atuacao/direito-do-consumidor">
+            <Link href="/areas-de-atuacao/direito-civil-geral">
               <img 
-              src="/ImgAreasDeAtuacao/miniaturas/direito-do-consumidor.svg" 
-              alt="Direito-Do-Consumidor" 
-              className="hover:shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer"
+              src="/ImgAreasDeAtuacao/miniaturas/direito-civil-geral.svg" 
+              alt="Direito-Geral" 
+              className="hover:shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 cursor-pointer" 
               />
             </Link>
           </div>
