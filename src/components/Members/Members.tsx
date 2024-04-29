@@ -151,7 +151,7 @@ export const Members = ({
         </div>
 
         <div className="mt-4 p-3">
-          <div className="flex flex-row justify-end pb-3 gap-10">
+          <div className="flex justify-evenly   md:flex md:flex-row md:justify-end pb-3 gap-10">
             <button
               className="bg-black rounded-3xl  text-white font-Alegreya  py-2 px-4 transition-all duration-500 hover:-translate-y-2"
               onClick={() => setHanddleEditar(!handdleEditar)}
@@ -159,7 +159,7 @@ export const Members = ({
               Editar
             </button>
             <button className="bg-black rounded-3xl  text-white font-Alegreya  py-2 px-4 transition-all duration-500 hover:-translate-y-2">
-              Deletar
+              Remover
             </button>
           </div>
 
