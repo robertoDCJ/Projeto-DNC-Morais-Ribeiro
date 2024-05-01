@@ -24,7 +24,7 @@ export default function Home() {
           para trabalhar juntos na busca por soluções eficazes e justas.
         </p>
       </ControlledCarousel>
-      <SectionHome/>
+      <SectionHome />
     </div>
   );
 }

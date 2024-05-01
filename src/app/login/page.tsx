@@ -1,7 +1,17 @@
-export default function Login() {
+import { auth } from "@/../auth";
+import { redirect } from "next/navigation";
+import login from "./_actions/login";
+
+export default async function Login() {
+  const session = await auth();
+  if (session) redirect("/");
+
   return (
     <div className="flex justify-center items-center h-screen bg-slate-600 p-4">
-      <form className="flex flex-col gap-3 p-4 rounded-lg justify-center items-center bg-slate-800/70 w-96">
+      <form
+        action={login}
+        className="flex flex-col gap-3 p-4 rounded-lg justify-center items-center bg-slate-800/70 w-96"
+      >
         <h2 className="font-bold text-2xl mb-2">Área de Login</h2>
         <input
           type="email"
@@ -15,7 +25,10 @@ export default function Login() {
           placeholder="Senha"
           className="py-1 px-2 rounded-sm text-black w-full"
         />
-        <button className="bg-white/50 w-full rounded-sm py-1 font-semibold">
+        <button
+          type="submit"
+          className="bg-white/50 w-full rounded-sm py-1 font-semibold"
+        >
           Login
         </button>
       </form>
