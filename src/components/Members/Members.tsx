@@ -2,15 +2,16 @@
 
 import { useState } from "react";
 import { ChangeEvent } from "react";
+import { useForm } from "react-hook-form"
 
 type Member = {
   id: number;
-  image: string;
   name: string;
   profession: string;
   location: string;
   email: string;
   linkedin: string;
+  image: string;
 };
 
 export const Members = ({
@@ -20,13 +21,25 @@ export const Members = ({
   member: Member;
   line: boolean;
 }) => {
-  const [name, setName] = useState<string>(member.name);
-  const [profession, setProfession] = useState<string>(member.profession);
-  const [location, setLocation] = useState<string>(member.location);
-  const [email, setEmail] = useState<string>(member.email);
-  const [linkedin, setLinkedin] = useState<string>(member.linkedin);
+  const {register, handleSubmit} = useForm({
+    defaultValues:{
+      id: member.id,
+      name: member.name,
+      profession: member.profession,
+      location: member.location,
+      email: member.email,
+      linkedin: member.linkedin,
+      image: member.image,
+    }
+  });
+
+  const onSubmit = handleSubmit( data => {
+    console.log(data)
+  });
+
+
   const [fotoURL, setFotoURL] = useState<string | null>(
-    "/ImgMembers/Background.svg"
+    member.image? member.image : "/ImgMembers/Background.svg"
   );
   const [handdleEditar, setHanddleEditar] = useState<boolean>(false);
 
@@ -51,80 +64,85 @@ export const Members = ({
           style={{ width: "200px" }}
         />
           {" "}
-        <form className="text-black font-Alegreya font-bold grid gap-1 p-4 max-w-screen-sm">
+        <form onSubmit={onSubmit}
+         className="text-black font-Alegreya font-bold grid gap-1 p-4 max-w-screen-sm">
           <label htmlFor="name">Nome</label>
           <input
+            {...register("name", {
+              required: false
+            })
+          }
+
             className="text-gray-500"
             id="name"
             type="text"
             placeholder="Nome"
-            name="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
           />
           <label htmlFor="profession">Profissão</label>
           <input
+             {...register("profession", {
+                required: false
+             })}
+
             className="text-gray-500"
             id="profession"
             type="text"
             placeholder="Profissao"
-            name="profession"
-            value={profession}
-            onChange={(e) => setProfession(e.target.value)}
-            required
           />
           <label htmlFor="location">Região</label>
           <input
+            {...register("location", {
+              required: false
+            })}
+
             className="text-gray-500"
             id="location"
             type="text"
             placeholder="Região"
-            name="location"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            required
           />
           <label htmlFor="email">Email</label>
           <input
+            {...register("email", {
+              required: false
+            })}
+
             className="text-gray-500"
             id="email"
             type="email"
             placeholder="Email"
-            name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
           />
           <label htmlFor="linkedin">Linkedin</label>
           <input
+             {...register("linkedin", {
+              required: false
+            })
+          }
             className="text-gray-500"
             id="linkedin"
             type="text"
             placeholder="LinkedIn"
-            name="linkedin"
-            value={linkedin}
-            onChange={(e) => setLinkedin(e.target.value)}
-            required
           />
           <label htmlFor="image">Foto</label>
           <input
+            {...register("image", {
+              required: false
+            })
+          }
             className="text-gray-500"
             id="image"
             type="file"
             accept="image/*"
             onChange={handleImagenSeleccionada}
-            required
           />
           <div className="grid grid-cols-2 place-items-center  pt-4">
             <button
-              className="bg-black rounded-3xl  text-white font-Alegreya w-24  py-1  transition-all duration-500 hover:-translate-y-2"
+              className="bg-black rounded-md  text-white font-Alegreya w-24  py-1  transition-all duration-500 hover:-translate-y-2"
               type="submit"
             >
               Guardar
             </button>
             <button
-              className="bg-black rounded-3xl  text-white font-Alegreya w-24  py-1 transition-all duration-500 hover:-translate-y-2"
+              className="bg-black rounded-md  text-white font-Alegreya w-24  py-1 transition-all duration-500 hover:-translate-y-2"
               onClick={()=> setHanddleEditar(!handdleEditar)}
               type="button"
             >
@@ -153,12 +171,12 @@ export const Members = ({
         <div className="mt-4 p-3">
           <div className="flex justify-evenly   md:flex md:flex-row md:justify-end pb-3 gap-10">
             <button
-              className="bg-black rounded-3xl  text-white font-Alegreya  py-2 px-4 transition-all duration-500 hover:-translate-y-2"
+              className="bg-black rounded-md  text-white font-Alegreya  py-2 px-4 transition-all duration-500 hover:-translate-y-2"
               onClick={() => setHanddleEditar(!handdleEditar)}
             >
               Editar
             </button>
-            <button className="bg-black rounded-3xl  text-white font-Alegreya  py-2 px-4 transition-all duration-500 hover:-translate-y-2">
+            <button className="bg-black rounded-md  text-white font-Alegreya  py-2 px-4 transition-all duration-500 hover:-translate-y-2">
               Remover
             </button>
           </div>
