@@ -18,12 +18,14 @@ export default async function Login() {
           name="email"
           placeholder="Email"
           className="py-1 px-2 rounded-sm text-black w-full"
+          required
         />
         <input
           type="password"
           name="password"
           placeholder="Senha"
           className="py-1 px-2 rounded-sm text-black w-full"
+          required
         />
         <button
           type="submit"

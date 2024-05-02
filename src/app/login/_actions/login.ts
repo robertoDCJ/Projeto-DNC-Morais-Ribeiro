@@ -19,7 +19,7 @@ export default async function login(formData: FormData) {
   } catch (e) {
     if (e instanceof AuthError) {
       if (e.type === "CredentialsSignin") {
-        throw new Error("Credenciais inválidas");
+        throw new Error("Email ou senha invalidos");
       }
     }
   }
