@@ -9,7 +9,7 @@ export default async function Login() {
   if (session) redirect("/");
 
   return (
-    <div className="flex justify-center items-center h-screen bg-slate-600 p-4">
+    <div className="flex justify-center items-center h-screen bg-black p-4">
       <form
         action={login}
         className="flex flex-col gap-3 p-4 rounded-lg justify-center items-center bg-slate-800/70 w-96"

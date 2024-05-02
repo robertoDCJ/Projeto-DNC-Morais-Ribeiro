@@ -29,7 +29,7 @@ export const Header = ({ className, ...props }: HeaderProps) => {
 
   return (
     <div
-      className={`flex flex-row md:px-8 px-4 items-center md:justify-between justify-center bg-black ${className}`}
+      className={`flex flex-row md:px-8 px-4 items-center md:justify-between justify-center bg-black sticky top-0 z-40 w-full ${className}`}
       {...props}
     >
       <Image

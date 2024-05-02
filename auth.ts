@@ -7,6 +7,7 @@ export const {
   handlers: { GET, POST },
   signIn,
   auth,
+  signOut,
 } = NextAuth({
   pages: {
     signIn: "/login",
