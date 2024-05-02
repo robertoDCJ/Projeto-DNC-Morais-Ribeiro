@@ -1,4 +1,6 @@
 import { auth } from "@/../auth";
+import user from "@/../public/user.svg";
+import Image from "next/image";
 import { redirect } from "next/navigation";
 import login from "./_actions/login";
 
@@ -12,7 +14,10 @@ export default async function Login() {
         action={login}
         className="flex flex-col gap-3 p-4 rounded-lg justify-center items-center bg-slate-800/70 w-96"
       >
-        <h2 className="font-bold text-2xl mb-2">Área de Login</h2>
+        <div className="flex gap-2 justify-center items-baseline">
+          <Image className="w-5" src={user} alt="user icon" />
+          <h2 className="font-bold text-2xl mb-2">Área de Login</h2>
+        </div>
         <input
           type="email"
           name="email"
