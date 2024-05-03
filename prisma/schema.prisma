@@ -28,3 +28,13 @@ model Post {
   image  String
   user   User   @relation(fields: [userId], references: [id])
 }
+
+model Member {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  name   String
+  profession  String
+  location  String
+  email  String
+  linkedin  String
+  image  String
+}

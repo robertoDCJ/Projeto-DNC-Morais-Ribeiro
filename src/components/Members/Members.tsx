@@ -33,10 +33,28 @@ export const Members = ({
     }
   });
 
-  const onSubmit = handleSubmit( data => {
-    console.log(data)
-  });
+  const onSubmit = handleSubmit( async (data) => {
+    try{
+    const response = await fetch("/api/member", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
 
+    }});
+
+    if (response.ok) {
+      // Si la respuesta es exitosa, muestra un mensaje de éxito o redirige a otra página
+      console.log("Usuario guardado exitosamente");
+    } else {
+      // Si hay un error en la respuesta, maneja el error de acuerdo a tus necesidades
+      console.error("Error al guardar el usuario");
+    }
+   }catch (error) {
+    // Si hay un error durante la solicitud, maneja el error de acuerdo a tus necesidades
+    console.error("Error al enviar la solicitud:", error);
+    }
+});
 
   const [fotoURL, setFotoURL] = useState<string | null>(
     member.image? member.image : "/ImgMembers/Background.svg"
@@ -53,7 +71,7 @@ export const Members = ({
   };
 
   return (
-    <div className="w-full relative grid place-items-center max-w-screen-xl p-4">
+    <div className="w-full  grid place-items-center max-w-screen-xl p-4">
       {handdleEditar && <>
       <div className="w-full h-full bg-slate-700 opacity-50 rounded-3xl  absolute  z-20"/>
       <div className="flex flex-col  items-center md:flex md:flex-row md:items-start  bg-white rounded-3xl  absolute  z-30">
