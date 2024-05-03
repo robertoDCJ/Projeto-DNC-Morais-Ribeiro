@@ -69,8 +69,8 @@ export default function Equipe() {
                     alt="Foto seleccionada"
                     style={{ width: "200px" }}
                   />{" "}
-                  <p  className="text-black font-Alegreya font-bold">
-                    Adicione uma foto</p>
+                  {fotoURL == "/ImgMembers/Background.svg" && <p  className="text-black font-Alegreya font-bold">
+                    Adicione uma foto</p>}
                 </div>
                 <form
                   onSubmit={onSubmit}
