@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
+import { ButtonEdit } from "./ButtonEdit/ButtonEdit";
 
 type Member = {
   id: number;
@@ -41,99 +41,100 @@ export const Members = ({
 
   return (
     <div className="w-full relative grid place-items-center max-w-screen-xl p-4">
-      {handdleEditar && <>
-      <div className="w-full h-full bg-slate-700 opacity-50 rounded-3xl  absolute  z-20"/>
-      <div className="flex flex-col  items-center md:flex md:flex-row md:items-start  bg-white rounded-3xl  absolute  z-30">
-        <img
-          className="p-4"
-          src={`${fotoURL}`}
-          alt="Foto seleccionada"
-          style={{ width: "200px" }}
-        />
-          {" "}
-        <form className="text-black font-Alegreya font-bold grid gap-1 p-4 max-w-screen-sm">
-          <label htmlFor="name">Nome</label>
-          <input
-            className="text-gray-500"
-            id="name"
-            type="text"
-            placeholder="Nome"
-            name="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-          <label htmlFor="profession">Profissão</label>
-          <input
-            className="text-gray-500"
-            id="profession"
-            type="text"
-            placeholder="Profissao"
-            name="profession"
-            value={profession}
-            onChange={(e) => setProfession(e.target.value)}
-            required
-          />
-          <label htmlFor="location">Região</label>
-          <input
-            className="text-gray-500"
-            id="location"
-            type="text"
-            placeholder="Região"
-            name="location"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            required
-          />
-          <label htmlFor="email">Email</label>
-          <input
-            className="text-gray-500"
-            id="email"
-            type="email"
-            placeholder="Email"
-            name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <label htmlFor="linkedin">Linkedin</label>
-          <input
-            className="text-gray-500"
-            id="linkedin"
-            type="text"
-            placeholder="LinkedIn"
-            name="linkedin"
-            value={linkedin}
-            onChange={(e) => setLinkedin(e.target.value)}
-            required
-          />
-          <label htmlFor="image">Foto</label>
-          <input
-            className="text-gray-500"
-            id="image"
-            type="file"
-            accept="image/*"
-            onChange={handleImagenSeleccionada}
-            required
-          />
-          <div className="grid grid-cols-2 place-items-center  pt-4">
-            <button
-              className="bg-black rounded-3xl  text-white font-Alegreya w-24  py-1  transition-all duration-500 hover:-translate-y-2"
-              type="submit"
-            >
-              Guardar
-            </button>
-            <button
-              className="bg-black rounded-3xl  text-white font-Alegreya w-24  py-1 transition-all duration-500 hover:-translate-y-2"
-              onClick={()=> setHanddleEditar(!handdleEditar)}
-              type="button"
-            >
-              Sair
-            </button>
+      {handdleEditar && (
+        <>
+          <div className="w-full h-full bg-slate-700 opacity-50 rounded-3xl  absolute  z-20" />
+          <div className="flex flex-col  items-center md:flex md:flex-row md:items-start  bg-white rounded-3xl  absolute  z-30">
+            <img
+              className="p-4"
+              src={`${fotoURL}`}
+              alt="Foto seleccionada"
+              style={{ width: "200px" }}
+            />{" "}
+            <form className="text-black font-Alegreya font-bold grid gap-1 p-4 max-w-screen-sm">
+              <label htmlFor="name">Nome</label>
+              <input
+                className="text-gray-500"
+                id="name"
+                type="text"
+                placeholder="Nome"
+                name="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+              <label htmlFor="profession">Profissão</label>
+              <input
+                className="text-gray-500"
+                id="profession"
+                type="text"
+                placeholder="Profissao"
+                name="profession"
+                value={profession}
+                onChange={(e) => setProfession(e.target.value)}
+                required
+              />
+              <label htmlFor="location">Região</label>
+              <input
+                className="text-gray-500"
+                id="location"
+                type="text"
+                placeholder="Região"
+                name="location"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                required
+              />
+              <label htmlFor="email">Email</label>
+              <input
+                className="text-gray-500"
+                id="email"
+                type="email"
+                placeholder="Email"
+                name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              <label htmlFor="linkedin">Linkedin</label>
+              <input
+                className="text-gray-500"
+                id="linkedin"
+                type="text"
+                placeholder="LinkedIn"
+                name="linkedin"
+                value={linkedin}
+                onChange={(e) => setLinkedin(e.target.value)}
+                required
+              />
+              <label htmlFor="image">Foto</label>
+              <input
+                className="text-gray-500"
+                id="image"
+                type="file"
+                accept="image/*"
+                onChange={handleImagenSeleccionada}
+                required
+              />
+              <div className="grid grid-cols-2 place-items-center  pt-4">
+                <button
+                  className="bg-black rounded-3xl  text-white font-Alegreya w-24  py-1  transition-all duration-500 hover:-translate-y-2"
+                  type="submit"
+                >
+                  Guardar
+                </button>
+                <button
+                  className="bg-black rounded-3xl  text-white font-Alegreya w-24  py-1 transition-all duration-500 hover:-translate-y-2"
+                  onClick={() => setHanddleEditar(!handdleEditar)}
+                  type="button"
+                >
+                  Sair
+                </button>
+              </div>
+            </form>
           </div>
-        </form>
-      </div>
-      </>}
+        </>
+      )}
 
       {line && (
         <div className="grid grid-rows-2 w-full place-items-end">
@@ -152,12 +153,7 @@ export const Members = ({
 
         <div className="mt-4 p-3">
           <div className="flex justify-evenly   md:flex md:flex-row md:justify-end pb-3 gap-10">
-            <button
-              className="bg-black rounded-3xl  text-white font-Alegreya  py-2 px-4 transition-all duration-500 hover:-translate-y-2"
-              onClick={() => setHanddleEditar(!handdleEditar)}
-            >
-              Editar
-            </button>
+            <ButtonEdit onClick={() => setHanddleEditar(!handdleEditar)} />
             <button className="bg-black rounded-3xl  text-white font-Alegreya  py-2 px-4 transition-all duration-500 hover:-translate-y-2">
               Remover
             </button>
