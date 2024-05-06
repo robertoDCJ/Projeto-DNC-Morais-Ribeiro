@@ -230,7 +230,7 @@ export const Members = ({
         <div className="mt-4 p-3">
           <div className="flex justify-evenly   md:flex md:flex-row md:justify-end pb-5 gap-10">
             <button
-              className="bg-black rounded-3xl  text-white font-Alegreya  py-2 px-4 transition-all duration-500 hover:-translate-y-2"
+              className="bg-black rounded-md  text-white font-Alegreya  py-2 px-4 transition-all duration-500 hover:-translate-y-2"
               onClick={() => {
                 setHanddleEditar(!handdleEditar);
               }}
