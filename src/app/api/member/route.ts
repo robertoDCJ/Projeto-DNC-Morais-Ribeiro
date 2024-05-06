@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 
-type MemberBody = {
+type Member = {
+  id: string
   name: string
   profession: string
   location: string
@@ -10,37 +11,23 @@ type MemberBody = {
   image: string
 }
 
-type UserUpdate = {
-  userId: string
-  avatar: string
-}
 
 const prisma = new PrismaClient()
 
-export async function GET(Request: NextRequest){
+export async function GET(req: NextRequest){
   try {
-    const userId = Request.nextUrl.searchParams.get("userId");
+    const allMembers =  await prisma.member.findMany();
   
-    if(typeof(userId) === 'string'){
-     const user = await prisma.user.findFirst({
-        where: {
-          id: userId
-        }
-      })
-  
-      return NextResponse.json({user})
-    }
-      const users = await prisma.user.findMany();
-  
-      return NextResponse.json(users);
-  } catch (error) {
+      return NextResponse.json(allMembers)
+
+    } catch (error) {
     return NextResponse.json({msg: error}, {status: 500})
   }
 
 }
-export  async function POST(Request: NextRequest){
+export  async function POST(req: NextRequest){
   try {
-    const {name, profession, location, email, linkedin, image}: MemberBody = await Request.json();
+    const {name, profession, location, email, linkedin, image}: Member = await req.json();
   
     const user = prisma.member.create({
       data: {
@@ -60,20 +47,36 @@ export  async function POST(Request: NextRequest){
   }
 }
 
-export  async function PUT(Request: NextRequest){
+export async function PUT(req: NextRequest, res: NextResponse) {
   try {
-    const {userId, avatar}: UserUpdate = await Request.json();
+    const { id, ...updateFields }: Member = await req.json();
+
+    await prisma.member.update({
+      where: { id }, 
+      data: updateFields, 
+    });
+
+    return NextResponse.json({ msg: "Usuario editado com sucesso", userId: id });
+  } catch (error) {
+    return NextResponse.json({ msg: error }, { status: 500 });
+  }
+}
+
+export async function DELETE(req: NextRequest){
+  try {
+
+    const id = req.nextUrl.searchParams.get("id");
   
-    const deleteUser = await prisma.user.update({
+    if (!id) {
+      throw new Error("ID not provided in URL");
+    }
+    const deleteMember = await prisma.member.delete({
       where: {
-        id: userId,
+        id: id
       },
-      data: {
-        avatar
-      }
-    })
+    });
   
-    return NextResponse.json({msg: "Usuario editado com sucesso", userId: ( deleteUser).id});
+    return NextResponse.json({msg: "Membro apagado com sucesso", id: deleteMember});
   } catch (error) {
     return NextResponse.json({msg: error}, {status: 500});
   }

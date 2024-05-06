@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ChangeEvent } from "react";
 import { useForm } from "react-hook-form";
 import { Members } from "@/components/Members/Members";
@@ -35,25 +35,88 @@ const data = [
     image: "/ImgMembers/Gustavo.svg",
   },
 ];
+type Member = {
+  id: string;
+  name: string;
+  profession: string;
+  location: string;
+  email: string;
+  linkedin: string;
+  image: string;
+};
 
 export default function Equipe() {
-  const { register, handleSubmit } = useForm();
-
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
-  });
-
+  const { register, handleSubmit } = useForm<Member>({});
   const [fotoURL, setFotoURL] = useState<string | null>("/ImgMembers/Background.svg");
   const [handdleAddMember, setHanddleAddMember] = useState<boolean>(false);
+  const [members, setMembers] = useState<Member[]>([]);
+  const [message, setMessage] = useState<string | null>("");
 
-  const handleImagenSeleccionada = (event: ChangeEvent<HTMLInputElement>) => {
-    const archivos = event.currentTarget.files;
-    if (archivos && archivos.length > 0) {
-      const imagenSeleccionada = archivos[0];
-      const urlImagen = URL.createObjectURL(imagenSeleccionada);
-      setFotoURL(urlImagen);
+
+//Get members
+  useEffect(()=>{
+    const fetchMembers = async () =>{
+      try{
+        const response = await fetch("/api/member");
+        if (response.ok){
+          const data = await response.json();
+          setMembers(data);
+        } else{
+          console.error("error ao obter os membros", response.statusText);
+        }
+      }catch(error){
+        console.error("Error ao obter os membros:", error);
+      }
     }
-  };
+    fetchMembers();
+  }, []);
+
+//Add members
+const onSubmit = handleSubmit(async (data) => {
+  const newData = {...data, image: fotoURL}
+  try {
+    const response = await fetch("/api/member", {
+      method: "POST",
+      body: JSON.stringify(newData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.ok) {
+      console.log("Membro adicionado com sucesso!");
+      setMessage("Membro adicionado com sucesso!");
+      setTimeout(()=>{
+        setMessage("")
+      }, 3000)
+    } else {
+      console.error("Erro ao adicionar o membro");
+      setMessage("Erro ao adicionar o membro!");
+      setTimeout(()=>{
+        setMessage("")
+      }, 3000)
+    }
+  } catch (error) {
+    console.error("Erro ao enviar a requisição:", error);
+  }
+});
+
+//Render and conversion seleted image
+const handleSelectedImage = (event: ChangeEvent<HTMLInputElement>) => {
+  const files = event.currentTarget.files;
+  if (files && files.length > 0) {
+    const imageSelected = files[0];
+    const reader = new FileReader();
+    reader.onload = () =>{
+      const base64String = reader.result?.toString();
+
+      if (base64String){
+       setFotoURL(base64String)
+      }
+    };
+    reader.readAsDataURL(imageSelected);
+  }
+};
   return (
     <div className="relative">
       {handdleAddMember && (
@@ -79,7 +142,7 @@ export default function Equipe() {
                   <label htmlFor="name">Nome</label>
                   <input
                     {...register("name", {
-                      required: false,
+                      required: true,
                     })}
                     className="text-gray-500"
                     id="name"
@@ -89,7 +152,7 @@ export default function Equipe() {
                   <label htmlFor="profession">Profissão</label>
                   <input
                     {...register("profession", {
-                      required: false,
+                      required: true,
                     })}
                     className="text-gray-500"
                     id="profession"
@@ -99,7 +162,7 @@ export default function Equipe() {
                   <label htmlFor="location">Região</label>
                   <input
                     {...register("location", {
-                      required: false,
+                      required: true,
                     })}
                     className="text-gray-500"
                     id="location"
@@ -129,13 +192,13 @@ export default function Equipe() {
                   <label htmlFor="image">Foto</label>
                   <input
                     {...register("image", {
-                      required: false,
+                      required: true,
                     })}
                     className="text-gray-500"
                     id="image"
                     type="file"
                     accept="image/*"
-                    onChange={handleImagenSeleccionada}
+                    onChange={handleSelectedImage}
                   />
                   <div className="grid grid-cols-2 place-items-center  pt-4">
                     <button
@@ -152,6 +215,10 @@ export default function Equipe() {
                       Sair
                     </button>
                   </div>
+                    { message &&
+                        <div className="grid place-items-center p-2 font-bold">
+                        <p>{message}</p>
+                    </div>}
                 </form>
               </div>
             </div>
@@ -184,11 +251,11 @@ export default function Equipe() {
             </button>
           </div>
         </div>
-        {data.map((member) => (
+        {members.map((member, index) => (
           <Members
             key={member.id}
             member={member}
-            line={member.id == 1 ? false : true}
+            line={index == 0 ? false : true}
           />
         ))}
       </div>

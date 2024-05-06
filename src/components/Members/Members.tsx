@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import { ChangeEvent } from "react";
-import { useForm } from "react-hook-form"
+import { useForm } from "react-hook-form";
 
 type Member = {
-  id: number;
+  id: string;
   name: string;
   profession: string;
   location: string;
@@ -21,8 +21,13 @@ export const Members = ({
   member: Member;
   line: boolean;
 }) => {
-  const {register, handleSubmit} = useForm({
-    defaultValues:{
+  const [message, setMessage] = useState<string | null>("");
+  const [handdleEditar, setHanddleEditar] = useState<boolean>(false);
+  const [fotoURL, setFotoURL] = useState<string | null>(
+    member.image ? member.image : "/ImgMembers/Background.svg"
+  );
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
       id: member.id,
       name: member.name,
       profession: member.profession,
@@ -30,146 +35,182 @@ export const Members = ({
       email: member.email,
       linkedin: member.linkedin,
       image: member.image,
+    },
+  });
+
+  // Update member
+  const onSubmit = handleSubmit(async (data) => {
+    const newData = { ...data, image: fotoURL };
+    try {
+      const response = await fetch("/api/member", {
+        method: "PUT",
+        body: JSON.stringify(newData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.ok) {
+        console.log("Membro atualizado com sucesso!");
+        setMessage("Membro atualizado com sucesso!");
+        setTimeout(()=>{
+          setMessage(null);
+        }, 3000)
+
+      } else {
+        console.error("Erro ao atualizar o membro");
+        setMessage("Erro ao atualizar o membro!");
+        setTimeout(()=>{
+          setMessage(null);
+        }, 3000)
+      }
+    } catch (error) {
+      console.error("Erro ao enviar a requisição:", error);
     }
   });
 
-  const onSubmit = handleSubmit( async (data) => {
-    try{
-    const response = await fetch("/api/member", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
+  //Delete member
+  const onDelete = async () => {
+    try {
+      const response = await fetch(`/api/member?id=${member.id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "Aplication/json",
+        },
+      });
 
-    }});
-
-    if (response.ok) {
-      // Si la respuesta es exitosa, muestra un mensaje de éxito o redirige a otra página
-      console.log("Usuario guardado exitosamente");
-    } else {
-      // Si hay un error en la respuesta, maneja el error de acuerdo a tus necesidades
-      console.error("Error al guardar el usuario");
+      if (response.ok) {
+        console.log("Membro apagado com sucesso!");
+        setMessage("Membro apagado com sucesso!");
+        setTimeout(()=>{
+          setMessage(null);
+        }, 3000)
+      } else {
+        console.log("Erro ao apagar membro");
+        setMessage("Erro ao apagar membro!");
+        setTimeout(()=>{
+          setMessage(null);
+        }, 3000)
+      }
+    } catch (error) {
+      console.error("Erro ao enviar a requisição:", error);
     }
-   }catch (error) {
-    // Si hay un error durante la solicitud, maneja el error de acuerdo a tus necesidades
-    console.error("Error al enviar la solicitud:", error);
-    }
-});
+  };
 
-  const [fotoURL, setFotoURL] = useState<string | null>(
-    member.image? member.image : "/ImgMembers/Background.svg"
-  );
-  const [handdleEditar, setHanddleEditar] = useState<boolean>(false);
+  //Render and conversion seleted image
+  const handleSelectedImage = (event: ChangeEvent<HTMLInputElement>) => {
+    const files = event.currentTarget.files;
+    if (files && files.length > 0) {
+      const imageSelected = files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64String = reader.result?.toString();
 
-  const handleImagenSeleccionada = (event: ChangeEvent<HTMLInputElement>) => {
-    const archivos = event.currentTarget.files;
-    if (archivos && archivos.length > 0) {
-      const imagenSeleccionada = archivos[0];
-      const urlImagen = URL.createObjectURL(imagenSeleccionada);
-      setFotoURL(urlImagen);
+        if (base64String) {
+          setFotoURL(base64String);
+        }
+      };
+      reader.readAsDataURL(imageSelected);
     }
   };
 
   return (
-    <div className="w-full  grid place-items-center max-w-screen-xl p-4">
-      {handdleEditar && <>
-      <div className="w-full h-full bg-slate-700 opacity-50 rounded-3xl  absolute  z-20"/>
-      <div className="flex flex-col  items-center md:flex md:flex-row md:items-start  bg-white rounded-3xl  absolute  z-30">
-        <img
-          className="p-4"
-          src={`${fotoURL}`}
-          alt="Foto seleccionada"
-          style={{ width: "200px" }}
-        />
-          {" "}
-        <form onSubmit={onSubmit}
-         className="text-black font-Alegreya font-bold grid gap-1 p-4 max-w-screen-sm">
-          <label htmlFor="name">Nome</label>
-          <input
-            {...register("name", {
-              required: false
-            })
-          }
-
-            className="text-gray-500"
-            id="name"
-            type="text"
-            placeholder="Nome"
-          />
-          <label htmlFor="profession">Profissão</label>
-          <input
-             {...register("profession", {
-                required: false
-             })}
-
-            className="text-gray-500"
-            id="profession"
-            type="text"
-            placeholder="Profissao"
-          />
-          <label htmlFor="location">Região</label>
-          <input
-            {...register("location", {
-              required: false
-            })}
-
-            className="text-gray-500"
-            id="location"
-            type="text"
-            placeholder="Região"
-          />
-          <label htmlFor="email">Email</label>
-          <input
-            {...register("email", {
-              required: false
-            })}
-
-            className="text-gray-500"
-            id="email"
-            type="email"
-            placeholder="Email"
-          />
-          <label htmlFor="linkedin">Linkedin</label>
-          <input
-             {...register("linkedin", {
-              required: false
-            })
-          }
-            className="text-gray-500"
-            id="linkedin"
-            type="text"
-            placeholder="LinkedIn"
-          />
-          <label htmlFor="image">Foto</label>
-          <input
-            {...register("image", {
-              required: false
-            })
-          }
-            className="text-gray-500"
-            id="image"
-            type="file"
-            accept="image/*"
-            onChange={handleImagenSeleccionada}
-          />
-          <div className="grid grid-cols-2 place-items-center  pt-4">
-            <button
-              className="bg-black rounded-md  text-white font-Alegreya w-24  py-1  transition-all duration-500 hover:-translate-y-2"
-              type="submit"
+    <div className="relative w-full  grid place-items-center max-w-screen-xl p-4">
+      {handdleEditar && (
+        <>
+          <div className="w-full h-full bg-slate-700 opacity-50 rounded-3xl  absolute  z-20" />
+          <div className="flex flex-col  items-center md:flex md:flex-row md:items-start  bg-white rounded-3xl  absolute  z-30">
+            <img
+              className="p-4"
+              src={`${fotoURL}`}
+              alt="Foto seleccionada"
+              style={{ width: "200px" }}
+            />{" "}
+            <form
+              onSubmit={onSubmit}
+              className="text-black font-Alegreya font-bold grid gap-1 p-4 max-w-screen-sm"
             >
-              Guardar
-            </button>
-            <button
-              className="bg-black rounded-md  text-white font-Alegreya w-24  py-1 transition-all duration-500 hover:-translate-y-2"
-              onClick={()=> setHanddleEditar(!handdleEditar)}
-              type="button"
-            >
-              Sair
-            </button>
+              <label htmlFor="name">Nome</label>
+              <input
+                {...register("name", {
+                  required: false,
+                })}
+                className="text-gray-500"
+                id="name"
+                type="text"
+                placeholder="Nome"
+              />
+              <label htmlFor="profession">Profissão</label>
+              <input
+                {...register("profession", {
+                  required: false,
+                })}
+                className="text-gray-500"
+                id="profession"
+                type="text"
+                placeholder="Profissao"
+              />
+              <label htmlFor="location">Região</label>
+              <input
+                {...register("location", {
+                  required: false,
+                })}
+                className="text-gray-500"
+                id="location"
+                type="text"
+                placeholder="Região"
+              />
+              <label htmlFor="email">Email</label>
+              <input
+                {...register("email", {
+                  required: false,
+                })}
+                className="text-gray-500"
+                id="email"
+                type="email"
+                placeholder="Email"
+              />
+              <label htmlFor="linkedin">Linkedin</label>
+              <input
+                {...register("linkedin", {
+                  required: false,
+                })}
+                className="text-gray-500"
+                id="linkedin"
+                type="text"
+                placeholder="LinkedIn"
+              />
+              <label htmlFor="image">Foto</label>
+              <input
+                className="text-gray-500"
+                id="image"
+                type="file"
+                accept="image/*"
+                onChange={handleSelectedImage}
+              />
+              <div className="grid grid-cols-2 place-items-center  pt-4">
+                <button
+                  className="bg-black rounded-md  text-white font-Alegreya w-24  py-1  transition-all duration-500 hover:-translate-y-2"
+                  type="submit"
+                >
+                  Guardar
+                </button>
+                <button
+                  className="bg-black rounded-md  text-white font-Alegreya w-24  py-1 transition-all duration-500 hover:-translate-y-2"
+                  onClick={() => setHanddleEditar(!handdleEditar)}
+                  type="button"
+                >
+                  Sair
+                </button>
+              </div>
+              { message &&
+                <div className="grid place-items-center p-2 font-bold">
+                <p>{message}</p>
+                </div>}
+            </form>
           </div>
-        </form>
-      </div>
-      </>}
+        </>
+      )}
 
       {line && (
         <div className="grid grid-rows-2 w-full place-items-end">
@@ -177,7 +218,7 @@ export const Members = ({
         </div>
       )}
 
-      <div className="grid md:flex md:flex-row text-black">
+      <div className="grid md:grid md:grid-cols-2   text-black">
         <div className="grid grid-cols-1 place-items-center">
           <img
             src={member.image}
@@ -187,14 +228,17 @@ export const Members = ({
         </div>
 
         <div className="mt-4 p-3">
-          <div className="flex justify-evenly   md:flex md:flex-row md:justify-end pb-3 gap-10">
+          <div className="flex justify-evenly   md:flex md:flex-row md:justify-end pb-5 gap-10">
             <button
               className="bg-black rounded-md  text-white font-Alegreya  py-2 px-4 transition-all duration-500 hover:-translate-y-2"
               onClick={() => setHanddleEditar(!handdleEditar)}
             >
               Editar
             </button>
-            <button className="bg-black rounded-md  text-white font-Alegreya  py-2 px-4 transition-all duration-500 hover:-translate-y-2">
+            <button
+              className="bg-black rounded-md  text-white font-Alegreya  py-2 px-4 transition-all duration-500 hover:-translate-y-2"
+              onClick={onDelete}
+            >
               Remover
             </button>
           </div>
@@ -239,6 +283,11 @@ export const Members = ({
               )}
             </div>
           </div>
+          {message &&
+          <div className="grid place-items-center mt-12 font-bold">
+            <p>{message}</p>
+          </div>}
+
         </div>
       </div>
     </div>
