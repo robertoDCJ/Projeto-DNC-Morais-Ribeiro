@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { ChangeEvent } from "react";
 import { useForm } from "react-hook-form";
 import { Members } from "@/components/Members/Members";
+import { auth } from "../../../auth";
 
 const data = [
   {
@@ -42,15 +43,18 @@ type Member = {
   location: string;
   email: string;
   linkedin: string;
-  image: string;
+  image: string
 };
 
 export default function Equipe() {
+  const [img, setImg] = useState<string | File>("");
   const { register, handleSubmit } = useForm<Member>({});
   const [fotoURL, setFotoURL] = useState<string | null>("/ImgMembers/Background.svg");
   const [handdleAddMember, setHanddleAddMember] = useState<boolean>(false);
   const [members, setMembers] = useState<Member[]>([]);
   const [message, setMessage] = useState<string | null>("");
+
+
 
 
 //Get members
@@ -73,25 +77,30 @@ export default function Equipe() {
 
 //Add members
 const onSubmit = handleSubmit(async (data) => {
-  const newData = {...data, image: fotoURL}
+  const form = new FormData();
+  form.append("name", data.name);
+  form.append("profession", data.profession);
+  form.append("location", data.location);
+  form.append("email", data.email);
+  form.append("linkedin", data.linkedin);
+  form.append("image", img); 
+  
   try {
     const response = await fetch("/api/member", {
       method: "POST",
-      body: JSON.stringify(newData),
-      headers: {
-        "Content-Type": "application/json",
-      },
+      body: form
+
     });
 
     if (response.ok) {
-      console.log("Membro adicionado com sucesso!");
-      setMessage("Membro adicionado com sucesso!");
+      const data = await response.json();
+      setMessage(data.msg);
       setTimeout(()=>{
         setMessage("")
       }, 3000)
     } else {
-      console.error("Erro ao adicionar o membro");
-      setMessage("Erro ao adicionar o membro!");
+      const data = await response.json();
+      setMessage(data.msg);
       setTimeout(()=>{
         setMessage("")
       }, 3000)
@@ -106,16 +115,10 @@ const handleSelectedImage = (event: ChangeEvent<HTMLInputElement>) => {
   const files = event.currentTarget.files;
   if (files && files.length > 0) {
     const imageSelected = files[0];
-    const reader = new FileReader();
-    reader.onload = () =>{
-      const base64String = reader.result?.toString();
-
-      if (base64String){
-       setFotoURL(base64String)
-      }
-    };
-    reader.readAsDataURL(imageSelected);
+    setImg(imageSelected);
+    setFotoURL(URL.createObjectURL(imageSelected))
   }
+
 };
   return (
     <div className="relative">

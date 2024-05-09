@@ -5,6 +5,7 @@ export default function Home() {
   return (
     <div>
       <ControlledCarousel>
+        <div className="">
         <h1 className="md:text-42 text-3xl font-bold mb-2 antialiased">
           Morais & Ribeiro
         </h1>
@@ -23,6 +24,7 @@ export default function Home() {
           Estamos honrados em fazer parte de sua jornada jurídica e ansiosos
           para trabalhar juntos na busca por soluções eficazes e justas.
         </p>
+      </div>
       </ControlledCarousel>
       <SectionHome />
     </div>

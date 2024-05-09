@@ -8,6 +8,15 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      animation: {
+        slide: 'slide 9s ease-in-out infinite',
+      },
+      keyframes: {
+        slide: {
+          '0%': { backgroundPosition: '0 0' },
+          '100%': { backgroundPosition: '100% 0' },
+        },
+      },
       height: {
         "659": "659px",
       },
