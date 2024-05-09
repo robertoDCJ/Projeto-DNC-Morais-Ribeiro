@@ -21,6 +21,7 @@ export const Members = ({
   member: Member;
   line: boolean;
 }) => {
+  const [img, setImg] = useState<string | File>(member.image);
   const [message, setMessage] = useState<string | null>("");
   const [handdleEditar, setHanddleEditar] = useState<boolean>(false);
   const [fotoURL, setFotoURL] = useState<string | null>(
@@ -40,26 +41,33 @@ export const Members = ({
 
   // Update member
   const onSubmit = handleSubmit(async (data) => {
-    const newData = { ...data, image: fotoURL };
+
+    const form = new FormData();
+    form.append("id", member.id)
+    form.append("name", data.name);
+    form.append("profession", data.profession);
+    form.append("location", data.location);
+    form.append("email", data.email);
+    form.append("linkedin", data.linkedin);
+    form.append("image", img); 
+    form.append("lastImage", member.image);
+
     try {
       const response = await fetch("/api/member", {
         method: "PUT",
-        body: JSON.stringify(newData),
-        headers: {
-          "Content-Type": "application/json",
-        },
+        body: form,
       });
 
       if (response.ok) {
-        console.log("Membro atualizado com sucesso!");
-        setMessage("Membro atualizado com sucesso!");
+        const data = await response.json();
+        setMessage(data.msg);
         setTimeout(()=>{
           setMessage(null);
         }, 3000)
 
       } else {
-        console.error("Erro ao atualizar o membro");
-        setMessage("Erro ao atualizar o membro!");
+        const data = await response.json();
+        setMessage(data.msg);
         setTimeout(()=>{
           setMessage(null);
         }, 3000)
@@ -72,7 +80,7 @@ export const Members = ({
   //Delete member
   const onDelete = async () => {
     try {
-      const response = await fetch(`/api/member?id=${member.id}`, {
+      const response = await fetch(`/api/member?id=${member.id}&filePath=${member.image}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "Aplication/json",
@@ -80,14 +88,14 @@ export const Members = ({
       });
 
       if (response.ok) {
-        console.log("Membro apagado com sucesso!");
-        setMessage("Membro apagado com sucesso!");
+        const data = await response.json();
+        setMessage(data.msg);
         setTimeout(()=>{
           setMessage(null);
         }, 3000)
       } else {
-        console.log("Erro ao apagar membro");
-        setMessage("Erro ao apagar membro!");
+        const data = await response.json();
+        setMessage(data.msg);
         setTimeout(()=>{
           setMessage(null);
         }, 3000)
@@ -97,22 +105,15 @@ export const Members = ({
     }
   };
 
-  //Render and conversion seleted image
-  const handleSelectedImage = (event: ChangeEvent<HTMLInputElement>) => {
-    const files = event.currentTarget.files;
-    if (files && files.length > 0) {
-      const imageSelected = files[0];
-      const reader = new FileReader();
-      reader.onload = () => {
-        const base64String = reader.result?.toString();
-
-        if (base64String) {
-          setFotoURL(base64String);
-        }
-      };
-      reader.readAsDataURL(imageSelected);
-    }
-  };
+//Render and conversion seleted image
+const handleSelectedImage = (event: ChangeEvent<HTMLInputElement>) => {
+  const files = event.currentTarget.files;
+  if (files && files.length > 0) {
+    const imageSelected = files[0];
+    setImg(imageSelected);
+    setFotoURL(URL.createObjectURL(imageSelected))
+  }
+}
 
   return (
     <div className="relative w-full  grid place-items-center max-w-screen-xl p-4">
@@ -133,7 +134,7 @@ export const Members = ({
               <label htmlFor="name">Nome</label>
               <input
                 {...register("name", {
-                  required: false,
+                  required: true,
                 })}
                 className="text-gray-500"
                 id="name"
@@ -143,7 +144,7 @@ export const Members = ({
               <label htmlFor="profession">Profissão</label>
               <input
                 {...register("profession", {
-                  required: false,
+                  required: true,
                 })}
                 className="text-gray-500"
                 id="profession"
@@ -153,7 +154,7 @@ export const Members = ({
               <label htmlFor="location">Região</label>
               <input
                 {...register("location", {
-                  required: false,
+                  required: true,
                 })}
                 className="text-gray-500"
                 id="location"
@@ -221,7 +222,7 @@ export const Members = ({
       <div className="grid md:grid md:grid-cols-2   text-black">
         <div className="grid grid-cols-1 place-items-center">
           <img
-            src={member.image}
+            src={`${member.image}`}
             alt={`Imagen de ${member.name} `}
             style={{ width: "436px" }}
           />

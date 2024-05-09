@@ -10,10 +10,11 @@ type Member = {
   location: string;
   email: string;
   linkedin: string;
-  image: string;
+  image: string
 };
 
 export default function Equipe() {
+  const [img, setImg] = useState<string | File>("");
   const { register, handleSubmit } = useForm<Member>({});
   const [fotoURL, setFotoURL] = useState<string | null>(
     "/ImgMembers/Background.svg"
@@ -22,10 +23,10 @@ export default function Equipe() {
   const [members, setMembers] = useState<Member[]>([]);
   const [message, setMessage] = useState<string | null>("");
 
-  //Get members
-  useEffect(() => {
-    const fetchMembers = async () => {
-      try {
+//Get members
+  useEffect(()=>{
+    const fetchMembers = async () =>{
+      try{
         const response = await fetch("/api/member");
         if (response.ok) {
           const data = await response.json();
@@ -40,52 +41,48 @@ export default function Equipe() {
     fetchMembers();
   }, []);
 
-  //Add members
-  const onSubmit = handleSubmit(async (data) => {
-    const newData = { ...data, image: fotoURL };
-    try {
-      const response = await fetch("/api/member", {
-        method: "POST",
-        body: JSON.stringify(newData),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+//Add members
+const onSubmit = handleSubmit(async (data) => {
+  const form = new FormData();
+  form.append("name", data.name);
+  form.append("profession", data.profession);
+  form.append("location", data.location);
+  form.append("email", data.email);
+  form.append("linkedin", data.linkedin);
+  form.append("image", img); 
+  
+  try {
+    const response = await fetch("/api/member", {
+      method: "POST",
+      body: form
 
-      if (response.ok) {
-        console.log("Membro adicionado com sucesso!");
-        setMessage("Membro adicionado com sucesso!");
-        setTimeout(() => {
-          setMessage("");
-        }, 3000);
-      } else {
-        console.error("Erro ao adicionar o membro");
-        setMessage("Erro ao adicionar o membro!");
-        setTimeout(() => {
-          setMessage("");
-        }, 3000);
-      }
-    } catch (error) {
-      console.error("Erro ao enviar a requisição:", error);
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      setMessage(data.msg);
+      setTimeout(()=>{
+        setMessage("")
+      }, 3000)
+    } else {
+      const data = await response.json();
+      setMessage(data.msg);
+      setTimeout(()=>{
+        setMessage("")
+      }, 3000)
     }
   });
 
-  //Render and conversion seleted image
-  const handleSelectedImage = (event: ChangeEvent<HTMLInputElement>) => {
-    const files = event.currentTarget.files;
-    if (files && files.length > 0) {
-      const imageSelected = files[0];
-      const reader = new FileReader();
-      reader.onload = () => {
-        const base64String = reader.result?.toString();
+//Render and conversion seleted image
+const handleSelectedImage = (event: ChangeEvent<HTMLInputElement>) => {
+  const files = event.currentTarget.files;
+  if (files && files.length > 0) {
+    const imageSelected = files[0];
+    setImg(imageSelected);
+    setFotoURL(URL.createObjectURL(imageSelected))
+  }
 
-        if (base64String) {
-          setFotoURL(base64String);
-        }
-      };
-      reader.readAsDataURL(imageSelected);
-    }
-  };
+};
   return (
     <div className="relative">
       {handdleAddMember && (

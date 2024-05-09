@@ -21,25 +21,20 @@ export default function SobreNos() {
   return (
     <div className="flex flex-col justify-center">
       <div
-        className={`flex ${
-          isAnimationActive ? "animate-slide" : "bg-center"
+        className={`flex justify-center ${
+          isAnimationActive ? "animate-slide" : "bg-top "
         }`}
         style={{
           backgroundImage: "url('/ImgSobreNos/Equipe.svg')",
-          height: "659px",
+          height: "700px",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
         }}
       >
-        <div
-          className="flex pt-5 md:w-556 w-full items-start ml-5 mt-9"
-
-          style={{marginTop: '300px', marginLeft: '80px', marginRight: '80px'}}
-
+        <div className="grid place-items-end max-w-screen-xl p-10"
         >
           <div className="flex flex-col md:w-856 sw-full">
-            <h1 className="font-Alegreya md:text-3xl text-xl pt-11 font-bold ">
+            <h1 className="font-Alegreya md:text-3xl text-xl font-bold ">
               Somos um escritório de advocacia composto por três colegas de faculdade que cultivaram uma relação sólida desde os bancos acadêmicos!
             </h1>
             <div className="border border-white my-3 antialiased" />
@@ -62,7 +57,7 @@ export default function SobreNos() {
           style={{ backgroundImage: "url('/ImgSobreNos/BackgroundGrey.svg')" }}
         >
           <div className="grid max-w-[806px]">
-            <div className="grid grid-cols-auto-fit text-black gap-12 pt-8 pb-8">
+            <div className="grid grid-cols-1 text-black gap-12 p-8">
               <h1 className=" font-Alegreya font-bold text-4xl">
                 Nossa missão é guiar cada interação com nossos clientes.
               </h1>
