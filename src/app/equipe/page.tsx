@@ -10,7 +10,7 @@ type Member = {
   location: string;
   email: string;
   linkedin: string;
-  image: string
+  image: string;
 };
 
 export default function Equipe() {
@@ -23,10 +23,10 @@ export default function Equipe() {
   const [members, setMembers] = useState<Member[]>([]);
   const [message, setMessage] = useState<string | null>("");
 
-//Get members
-  useEffect(()=>{
-    const fetchMembers = async () =>{
-      try{
+  //Get members
+  useEffect(() => {
+    const fetchMembers = async () => {
+      try {
         const response = await fetch("/api/member");
         if (response.ok) {
           const data = await response.json();
@@ -41,48 +41,49 @@ export default function Equipe() {
     fetchMembers();
   }, []);
 
-//Add members
-const onSubmit = handleSubmit(async (data) => {
-  const form = new FormData();
-  form.append("name", data.name);
-  form.append("profession", data.profession);
-  form.append("location", data.location);
-  form.append("email", data.email);
-  form.append("linkedin", data.linkedin);
-  form.append("image", img); 
-  
-  try {
-    const response = await fetch("/api/member", {
-      method: "POST",
-      body: form
+  //Add members
+  const onSubmit = handleSubmit(async (data) => {
+    const form = new FormData();
+    form.append("name", data.name);
+    form.append("profession", data.profession);
+    form.append("location", data.location);
+    form.append("email", data.email);
+    form.append("linkedin", data.linkedin);
+    form.append("image", img);
 
-    });
+    try {
+      const response = await fetch("/api/member", {
+        method: "POST",
+        body: form,
+      });
 
-    if (response.ok) {
-      const data = await response.json();
-      setMessage(data.msg);
-      setTimeout(()=>{
-        setMessage("")
-      }, 3000)
-    } else {
-      const data = await response.json();
-      setMessage(data.msg);
-      setTimeout(()=>{
-        setMessage("")
-      }, 3000)
+      if (response.ok) {
+        const data = await response.json();
+        setMessage(data.msg);
+        setTimeout(() => {
+          setMessage("");
+        }, 3000);
+      } else {
+        const data = await response.json();
+        setMessage(data.msg);
+        setTimeout(() => {
+          setMessage("");
+        }, 3000);
+      }
+    } catch (error) {
+      alert(error);
     }
   });
 
-//Render and conversion seleted image
-const handleSelectedImage = (event: ChangeEvent<HTMLInputElement>) => {
-  const files = event.currentTarget.files;
-  if (files && files.length > 0) {
-    const imageSelected = files[0];
-    setImg(imageSelected);
-    setFotoURL(URL.createObjectURL(imageSelected))
-  }
-
-};
+  //Render and conversion seleted image
+  const handleSelectedImage = (event: ChangeEvent<HTMLInputElement>) => {
+    const files = event.currentTarget.files;
+    if (files && files.length > 0) {
+      const imageSelected = files[0];
+      setImg(imageSelected);
+      setFotoURL(URL.createObjectURL(imageSelected));
+    }
+  };
   return (
     <div className="relative">
       {handdleAddMember && (
