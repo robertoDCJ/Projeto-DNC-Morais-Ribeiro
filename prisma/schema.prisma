@@ -15,20 +15,17 @@ datasource db {
 
 model User {
   id     String @id @default(auto()) @map("_id") @db.ObjectId
-  name   String?
   email String @unique
   password String?
-  avatar String
-  Post   Post[]
 }
 
 model Post {
   id     String @id @default(auto()) @map("_id") @db.ObjectId
   title  String
-  userId String @db.ObjectId
   text   String
-  image  String
-  user   User   @relation(fields: [userId], references: [id])
+  image  String?
+  authorId String @db.ObjectId
+  author   Member   @relation(fields: [authorId], references: [id])
 }
 
 model Member {
@@ -38,5 +35,6 @@ model Member {
   location  String
   email  String
   linkedin  String
-  image  String
+  image  String?
+  Post   Post[]
 }

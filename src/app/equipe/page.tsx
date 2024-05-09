@@ -1,40 +1,8 @@
 "use client";
-import { useState, useEffect } from "react";
-import { ChangeEvent } from "react";
-import { useForm } from "react-hook-form";
 import { Members } from "@/components/Members/Members";
+import { ChangeEvent, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 
-const data = [
-  {
-    id: 1,
-    name: "DRA. NIKOLLY KAROLINE MORAIS E SILVA ",
-    profession: "Advogada",
-    location: "São Paulo/SP",
-    email: "nikolly2@hotmail.com",
-    linkedin: "https://www.linkedin.com/in/nikolly-morais-silva-4a7271169/",
-    image: "/ImgMembers/Nikolly.svg",
-  },
-
-  {
-    id: 2,
-    name: "DR. JOÃO PEDRO RIBEIRO",
-    profession: "Advogado",
-    location: "São Paulo/SP",
-    email: "j.pedro.resende@hotmail.com",
-    linkedin: "https://www.linkedin.com/in/joaopedrorrmoliveira/",
-    image: "/ImgMembers/Joao.svg",
-  },
-
-  {
-    id: 3,
-    name: "DR. GUSTAVO SANTOS RIBEIRO",
-    profession: "Advogado",
-    location: "São Paulo/SP",
-    email: "",
-    linkedin: "https://www.linkedin.com/in/gustavo-santos-ribeiro-31b652196/",
-    image: "/ImgMembers/Gustavo.svg",
-  },
-];
 type Member = {
   id: string;
   name: string;
@@ -47,76 +15,77 @@ type Member = {
 
 export default function Equipe() {
   const { register, handleSubmit } = useForm<Member>({});
-  const [fotoURL, setFotoURL] = useState<string | null>("/ImgMembers/Background.svg");
+  const [fotoURL, setFotoURL] = useState<string | null>(
+    "/ImgMembers/Background.svg"
+  );
   const [handdleAddMember, setHanddleAddMember] = useState<boolean>(false);
   const [members, setMembers] = useState<Member[]>([]);
   const [message, setMessage] = useState<string | null>("");
 
-
-//Get members
-  useEffect(()=>{
-    const fetchMembers = async () =>{
-      try{
+  //Get members
+  useEffect(() => {
+    const fetchMembers = async () => {
+      try {
         const response = await fetch("/api/member");
-        if (response.ok){
+        if (response.ok) {
           const data = await response.json();
           setMembers(data);
-        } else{
+        } else {
           console.error("error ao obter os membros", response.statusText);
         }
-      }catch(error){
+      } catch (error) {
         console.error("Error ao obter os membros:", error);
       }
-    }
+    };
     fetchMembers();
   }, []);
 
-//Add members
-const onSubmit = handleSubmit(async (data) => {
-  const newData = {...data, image: fotoURL}
-  try {
-    const response = await fetch("/api/member", {
-      method: "POST",
-      body: JSON.stringify(newData),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+  //Add members
+  const onSubmit = handleSubmit(async (data) => {
+    const newData = { ...data, image: fotoURL };
+    try {
+      const response = await fetch("/api/member", {
+        method: "POST",
+        body: JSON.stringify(newData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-    if (response.ok) {
-      console.log("Membro adicionado com sucesso!");
-      setMessage("Membro adicionado com sucesso!");
-      setTimeout(()=>{
-        setMessage("")
-      }, 3000)
-    } else {
-      console.error("Erro ao adicionar o membro");
-      setMessage("Erro ao adicionar o membro!");
-      setTimeout(()=>{
-        setMessage("")
-      }, 3000)
-    }
-  } catch (error) {
-    console.error("Erro ao enviar a requisição:", error);
-  }
-});
-
-//Render and conversion seleted image
-const handleSelectedImage = (event: ChangeEvent<HTMLInputElement>) => {
-  const files = event.currentTarget.files;
-  if (files && files.length > 0) {
-    const imageSelected = files[0];
-    const reader = new FileReader();
-    reader.onload = () =>{
-      const base64String = reader.result?.toString();
-
-      if (base64String){
-       setFotoURL(base64String)
+      if (response.ok) {
+        console.log("Membro adicionado com sucesso!");
+        setMessage("Membro adicionado com sucesso!");
+        setTimeout(() => {
+          setMessage("");
+        }, 3000);
+      } else {
+        console.error("Erro ao adicionar o membro");
+        setMessage("Erro ao adicionar o membro!");
+        setTimeout(() => {
+          setMessage("");
+        }, 3000);
       }
-    };
-    reader.readAsDataURL(imageSelected);
-  }
-};
+    } catch (error) {
+      console.error("Erro ao enviar a requisição:", error);
+    }
+  });
+
+  //Render and conversion seleted image
+  const handleSelectedImage = (event: ChangeEvent<HTMLInputElement>) => {
+    const files = event.currentTarget.files;
+    if (files && files.length > 0) {
+      const imageSelected = files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64String = reader.result?.toString();
+
+        if (base64String) {
+          setFotoURL(base64String);
+        }
+      };
+      reader.readAsDataURL(imageSelected);
+    }
+  };
   return (
     <div className="relative">
       {handdleAddMember && (
@@ -132,8 +101,11 @@ const handleSelectedImage = (event: ChangeEvent<HTMLInputElement>) => {
                     alt="Foto seleccionada"
                     style={{ width: "200px" }}
                   />{" "}
-                  {fotoURL == "/ImgMembers/Background.svg" && <p  className="text-black font-Alegreya font-bold">
-                    Adicione uma foto</p>}
+                  {fotoURL == "/ImgMembers/Background.svg" && (
+                    <p className="text-black font-Alegreya font-bold">
+                      Adicione uma foto
+                    </p>
+                  )}
                 </div>
                 <form
                   onSubmit={onSubmit}
@@ -192,7 +164,7 @@ const handleSelectedImage = (event: ChangeEvent<HTMLInputElement>) => {
                   <label htmlFor="image">Foto</label>
                   <input
                     {...register("image", {
-                      required: true,
+                      required: false,
                     })}
                     className="text-gray-500"
                     id="image"
@@ -215,10 +187,11 @@ const handleSelectedImage = (event: ChangeEvent<HTMLInputElement>) => {
                       Sair
                     </button>
                   </div>
-                    { message &&
-                        <div className="grid place-items-center p-2 font-bold">
-                        <p>{message}</p>
-                    </div>}
+                  {message && (
+                    <div className="grid place-items-center p-2 font-bold">
+                      <p>{message}</p>
+                    </div>
+                  )}
                 </form>
               </div>
             </div>
@@ -233,9 +206,7 @@ const handleSelectedImage = (event: ChangeEvent<HTMLInputElement>) => {
         }}
       >
         <div className="grid grid-cols-2 place-items-center w-full max-w-screen-xl">
-            <h1 className="font-Alegreya font-bold text-5xl">
-              Equipe
-            </h1>
+          <h1 className="font-Alegreya font-bold text-5xl">Equipe</h1>
         </div>
       </div>
       <div
