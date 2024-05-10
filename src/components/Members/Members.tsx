@@ -66,7 +66,7 @@ export const Members = ({
         }, 3000);
       } else {
         const data = await response.json();
-        setMessage(data.msg);
+        setMessage(data.error);
         setTimeout(() => {
           setMessage(null);
         }, 3000);
@@ -266,8 +266,11 @@ export const Members = ({
                 </div>
               )}
 
-              {email && (
-                <a className="flex gap-3 underline">
+              {member.email && (
+                <a
+                  href={`mailto:${member.email}`}
+                  className="flex gap-3 underline"
+                >
                   <img src="/SocialMediaIcons/Email.svg" alt="Email Icon" />
                   {email}
                 </a>

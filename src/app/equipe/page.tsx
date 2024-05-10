@@ -6,6 +6,77 @@ export default async function Equipe() {
   const members = await db.member.findMany();
   const session = await auth();
 
+<<<<<<< HEAD
+=======
+export default function Equipe() {
+  const [img, setImg] = useState<string | File>("");
+  const { register, handleSubmit } = useForm<Member>({});
+  const [fotoURL, setFotoURL] = useState<string | null>(
+    "/ImgMembers/Background.svg"
+  );
+  const [handdleAddMember, setHanddleAddMember] = useState<boolean>(false);
+  const [members, setMembers] = useState<Member[]>([]);
+  const [message, setMessage] = useState<string | null>("");
+
+  //Get members
+  useEffect(() => {
+    const fetchMembers = async () => {
+      try {
+        const response = await fetch("/api/member");
+        if (response.ok) {
+          const data = await response.json();
+          setMembers(data);
+        } else {
+          console.error("error ao obter os membros", response.statusText);
+        }
+      } catch (error) {
+        console.error("Error ao obter os membros:", error);
+      }
+    };
+    fetchMembers();
+  }, []);
+
+  //Add members
+  const onSubmit = handleSubmit(async (data) => {
+    const form = new FormData();
+    form.append("name", data.name);
+    form.append("profession", data.profession);
+    form.append("location", data.location);
+    form.append("email", data.email);
+    form.append("linkedin", data.linkedin);
+    form.append("image", img);
+
+      const response = await fetch("/api/member", {
+        method: "POST",
+        body: form,
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setMessage(data.msg);
+        setTimeout(() => {
+          setMessage("");
+        }, 3000);
+      } else {
+        const data = await response.json();
+        setMessage(data.error);
+        setTimeout(() => {
+          setMessage("");
+        }, 3000);
+      }
+ 
+  });
+
+  //Render and conversion seleted image
+  const handleSelectedImage = (event: ChangeEvent<HTMLInputElement>) => {
+    const files = event.currentTarget.files;
+    if (files && files.length > 0) {
+      const imageSelected = files[0];
+      setImg(imageSelected);
+      setFotoURL(URL.createObjectURL(imageSelected));
+    }
+  };
+>>>>>>> main
   return (
     <div className="relative">
       <div
