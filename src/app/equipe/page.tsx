@@ -1,4 +1,4 @@
-import { FormAddMember, Members } from "@/components";
+import { FormAddMember, MembersContainer } from "@/components";
 import db from "@/lib/db";
 import { auth } from "../../../auth";
 
@@ -29,7 +29,7 @@ export default async function Equipe() {
           </div>
         )}
         {members.map((member, index) => (
-          <Members
+          <MembersContainer
             key={member.id}
             image={member.image}
             id={member.id}
@@ -39,6 +39,7 @@ export default async function Equipe() {
             email={member.email}
             linkedin={member.linkedin}
             line={index == 0 ? false : true}
+            session={session?.expires}
           />
         ))}
       </div>

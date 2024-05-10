@@ -12,6 +12,7 @@ export const Members = ({
   location,
   email,
   linkedin,
+  session,
 }: {
   line: boolean;
   image: string;
@@ -21,6 +22,7 @@ export const Members = ({
   location: string;
   email: string;
   linkedin: string;
+  session: string | undefined;
 }) => {
   const [img, setImg] = useState<string | File>(image);
   const [message, setMessage] = useState<string | null>("");
@@ -229,22 +231,25 @@ export const Members = ({
         </div>
 
         <div className="mt-4 p-3">
-          <div className="flex justify-evenly   md:flex md:flex-row md:justify-end pb-5 gap-10">
-            <button
-              className="bg-black rounded-md  text-white font-Alegreya  py-2 px-4 transition-all duration-500 hover:-translate-y-2"
-              onClick={() => {
-                setHanddleEditar(!handdleEditar);
-              }}
-            >
-              Editar
-            </button>
-            <button
-              className="bg-black rounded-md  text-white font-Alegreya  py-2 px-4 transition-all duration-500 hover:-translate-y-2"
-              onClick={onDelete}
-            >
-              Remover
-            </button>
-          </div>
+          {session && (
+            <div className="flex justify-evenly   md:flex md:flex-row md:justify-end pb-5 gap-10">
+              <button
+                className="bg-black rounded-md  text-white font-Alegreya  py-2 px-4 transition-all duration-500 hover:-translate-y-2"
+                onClick={() => {
+                  setHanddleEditar(!handdleEditar);
+                }}
+              >
+                Editar
+              </button>
+
+              <button
+                className="bg-black rounded-md  text-white font-Alegreya  py-2 px-4 transition-all duration-500 hover:-translate-y-2"
+                onClick={onDelete}
+              >
+                Remover
+              </button>
+            </div>
+          )}
 
           <h1 className="font-Alegreya font-bold text-2xl border-b-2 mb-5 border-black">
             {name}

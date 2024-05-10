@@ -6,4 +6,5 @@ export { FormAddMember } from "./FormAddMember/FormAddMember";
 export { Header } from "./Header/Header";
 export { Logout } from "./Logout/Logout";
 export { Members } from "./Members/Members";
+export { MembersContainer } from "./MembersContainer/MembersContainer";
 export { BasicMenu } from "./materialUI/BasicMenu";
