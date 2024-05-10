@@ -51,7 +51,6 @@ export default function Equipe() {
     form.append("linkedin", data.linkedin);
     form.append("image", img);
 
-    try {
       const response = await fetch("/api/member", {
         method: "POST",
         body: form,
@@ -65,14 +64,12 @@ export default function Equipe() {
         }, 3000);
       } else {
         const data = await response.json();
-        setMessage(data.msg);
+        setMessage(data.error);
         setTimeout(() => {
           setMessage("");
         }, 3000);
       }
-    } catch (error) {
-      alert(error);
-    }
+ 
   });
 
   //Render and conversion seleted image
