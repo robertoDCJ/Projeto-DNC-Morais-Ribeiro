@@ -266,11 +266,8 @@ export const Members = ({
                 </div>
               )}
 
-              {member.email && (
-                <a
-                  href={`mailto:${member.email}`}
-                  className="flex gap-3 underline"
-                >
+              {email && (
+                <a href={`mailto:${email}`} className="flex gap-3 underline">
                   <img src="/SocialMediaIcons/Email.svg" alt="Email Icon" />
                   {email}
                 </a>
