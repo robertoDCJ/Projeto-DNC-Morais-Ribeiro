@@ -1,56 +1,56 @@
 "use client";
 
-import { useState } from "react";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 
-type Member = {
-  id: string
-  name: string
-  profession: string
-  location: string
-  email: string
-  linkedin: string
-  image: string
-};
-
 export const Members = ({
-  member,
   line,
+  image,
+  id,
+  name,
+  profession,
+  location,
+  email,
+  linkedin,
 }: {
-  member: Member;
   line: boolean;
+  image: string;
+  id: string;
+  name: string;
+  profession: string;
+  location: string;
+  email: string;
+  linkedin: string;
 }) => {
-  const [img, setImg] = useState<string | File>(member.image);
+  const [img, setImg] = useState<string | File>(image);
   const [message, setMessage] = useState<string | null>("");
   const [handdleEditar, setHanddleEditar] = useState<boolean>(false);
   const [fotoURL, setFotoURL] = useState<string | null>(
-    member.image ? member.image : "/ImgMembers/Background.svg"
+    image ? image : "/ImgMembers/Background.svg"
   );
   const { register, handleSubmit } = useForm({
     defaultValues: {
-      id: member.id,
-      name: member.name,
-      profession: member.profession,
-      location: member.location,
-      email: member.email,
-      linkedin: member.linkedin,
-      image: member.image,
+      id: id,
+      name: name,
+      profession: profession,
+      location: location,
+      email: email,
+      linkedin: linkedin,
+      image: image,
     },
   });
 
   // Update member
   const onSubmit = handleSubmit(async (data) => {
-
     const form = new FormData();
-    form.append("id", member.id)
+    form.append("id", id);
     form.append("name", data.name);
     form.append("profession", data.profession);
     form.append("location", data.location);
     form.append("email", data.email);
     form.append("linkedin", data.linkedin);
-    form.append("image", img); 
-    form.append("lastImage", member.image);
+    form.append("image", img);
+    form.append("lastImage", image);
 
     try {
       const response = await fetch("/api/member", {
@@ -61,16 +61,15 @@ export const Members = ({
       if (response.ok) {
         const data = await response.json();
         setMessage(data.msg);
-        setTimeout(()=>{
+        setTimeout(() => {
           setMessage(null);
-        }, 3000)
-
+        }, 3000);
       } else {
         const data = await response.json();
         setMessage(data.msg);
-        setTimeout(()=>{
+        setTimeout(() => {
           setMessage(null);
-        }, 3000)
+        }, 3000);
       }
     } catch (error) {
       console.error("Erro ao enviar a requisição:", error);
@@ -80,7 +79,7 @@ export const Members = ({
   //Delete member
   const onDelete = async () => {
     try {
-      const response = await fetch(`/api/member?id=${member.id}&filePath=${member.image}`, {
+      const response = await fetch(`/api/member?id=${id}&filePath=${image}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "Aplication/json",
@@ -90,30 +89,30 @@ export const Members = ({
       if (response.ok) {
         const data = await response.json();
         setMessage(data.msg);
-        setTimeout(()=>{
+        setTimeout(() => {
           setMessage(null);
-        }, 3000)
+        }, 3000);
       } else {
         const data = await response.json();
         setMessage(data.msg);
-        setTimeout(()=>{
+        setTimeout(() => {
           setMessage(null);
-        }, 3000)
+        }, 3000);
       }
     } catch (error) {
       console.error("Erro ao enviar a requisição:", error);
     }
   };
 
-//Render and conversion seleted image
-const handleSelectedImage = (event: ChangeEvent<HTMLInputElement>) => {
-  const files = event.currentTarget.files;
-  if (files && files.length > 0) {
-    const imageSelected = files[0];
-    setImg(imageSelected);
-    setFotoURL(URL.createObjectURL(imageSelected))
-  }
-}
+  //Render and conversion seleted image
+  const handleSelectedImage = (event: ChangeEvent<HTMLInputElement>) => {
+    const files = event.currentTarget.files;
+    if (files && files.length > 0) {
+      const imageSelected = files[0];
+      setImg(imageSelected);
+      setFotoURL(URL.createObjectURL(imageSelected));
+    }
+  };
 
   return (
     <div className="relative w-full  grid place-items-center max-w-screen-xl p-4">
@@ -204,10 +203,11 @@ const handleSelectedImage = (event: ChangeEvent<HTMLInputElement>) => {
                   Sair
                 </button>
               </div>
-              { message &&
+              {message && (
                 <div className="grid place-items-center p-2 font-bold">
-                <p>{message}</p>
-                </div>}
+                  <p>{message}</p>
+                </div>
+              )}
             </form>
           </div>
         </>
@@ -222,8 +222,8 @@ const handleSelectedImage = (event: ChangeEvent<HTMLInputElement>) => {
       <div className="grid md:grid md:grid-cols-2   text-black">
         <div className="grid grid-cols-1 place-items-center">
           <img
-            src={`${member.image}`}
-            alt={`Imagen de ${member.name} `}
+            src={`${image}`}
+            alt={`Imagen de ${name} `}
             style={{ width: "436px" }}
           />
         </div>
@@ -247,50 +247,48 @@ const handleSelectedImage = (event: ChangeEvent<HTMLInputElement>) => {
           </div>
 
           <h1 className="font-Alegreya font-bold text-2xl border-b-2 mb-5 border-black">
-            {member.name}
+            {name}
           </h1>
 
           <div className="grid gap-3 md:grid  md:grid-cols-2 break-all">
-            {member.profession && (
-              <h1 className="font-Lato font-medium text-3xl">
-                {member.profession}
-              </h1>
+            {profession && (
+              <h1 className="font-Lato font-medium text-3xl">{profession}</h1>
             )}
 
             <div className="grid gap-3 font-Lato font-medium text-zinc-500">
-              {member.location && (
+              {location && (
                 <div className="flex gap-3">
                   <img
                     src="/SocialMediaIcons/Location.svg"
                     alt="Location Icon"
                   />
-                  {member.location}
+                  {location}
                 </div>
               )}
 
-              {member.email && (
+              {email && (
                 <a className="flex gap-3 underline">
                   <img src="/SocialMediaIcons/Email.svg" alt="Email Icon" />
-                  {member.email}
+                  {email}
                 </a>
               )}
 
-              {member.linkedin && (
-                <a href={member.linkedin} className="flex gap-3">
+              {linkedin && (
+                <a href={linkedin} className="flex gap-3">
                   <img
                     src="/SocialMediaIcons/Linkedin.svg"
                     alt="Linkedin Icon"
                   />
-                  {member.linkedin}
+                  {linkedin}
                 </a>
               )}
             </div>
           </div>
-          {message &&
-          <div className="grid place-items-center mt-12 font-bold">
-            <p>{message}</p>
-          </div>}
-
+          {message && (
+            <div className="grid place-items-center mt-12 font-bold">
+              <p>{message}</p>
+            </div>
+          )}
         </div>
       </div>
     </div>
