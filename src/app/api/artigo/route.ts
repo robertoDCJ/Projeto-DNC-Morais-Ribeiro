@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client'
+import path from 'path';
+import { writeFile } from 'fs/promises';
 
 const prisma = new PrismaClient();
 
@@ -12,16 +14,43 @@ type RequestBody = {
 
 export async function POST(request: NextRequest){
   try {
-    const {image, userId, title, text}: RequestBody = await request.json();
-    const post = await prisma.post.create({
+    const data  = await request.formData();
+    const authorId = data.get("authorId");
+    const file = data.get("image")
+    const datePublication = data.get("datePublication");
+    const title = data.get("title");
+    const text = data.get("text");
+
+
+    if (!file || !(file instanceof File)) {
+      throw new Error("Nenhum arquivo escolhido!");
+    }
+
+
+    const bytes = await file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+
+    const filePath = path.join(
+      process.cwd(),   "public/uploadsArtigos",   `${file.lastModified.toString()}_${file.name}`
+    );
+    writeFile(filePath, buffer);
+
+    const image = `/uploadsArtigos/${file.lastModified.toString()}_${file.name}`;
+
+
+    await prisma.post.create({
        data: {
-        image, 
-        title,
-        userId,
-        text
+        image: image as string,
+        authorId: authorId as string,
+        datePublication: datePublication as string,
+        title: title as string,
+        text: text as string,
        }
     })
+
+
     return NextResponse.json({msg: "Post realizado com sucesso"});
+    
   } catch (error) {
     return NextResponse.json({error: error}, {status: 500})
   }
