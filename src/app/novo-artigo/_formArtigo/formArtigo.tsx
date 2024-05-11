@@ -95,9 +95,9 @@ const onSubmit= handleSubmit( async (data)  => {
                   id="nome"
                 > 
     
-                  {members.map( (member: any) => (
+                  {members.map( (member: any, index: number) => (
 
-                  <option value={member.id} >{member.name}</option>
+                  <option key={index} value={member.id}>{member.name}</option>
                   ))}
 
                 </select>
