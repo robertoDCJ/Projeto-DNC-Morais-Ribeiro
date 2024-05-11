@@ -37,7 +37,7 @@ export const FormAddMember = () => {
         }, 3000);
       } else {
         const data = await response.json();
-        setMessage(data.msg);
+        setMessage(data.error);
         setTimeout(() => {
           setMessage("");
         }, 3000);
@@ -73,7 +73,7 @@ export const FormAddMember = () => {
       {handdleAddMember && (
         <>
           <div className="w-full h-full bg-slate-700 opacity-50  absolute top-0 left-0  z-20" />
-          <div className="grid justify-items-center w-full h-full absolute z-30 pt-96  ">
+          <div className="grid w-full h-full absolute z-30 pt-96  ">
             <div className="grid justify-items-center max-w-screen-xl">
               <div className="flex flex-col  items-center md:flex md:flex-row md:items-start  bg-white rounded-3xl absolute top-0 z-30">
                 <div className="grid place-items-center">

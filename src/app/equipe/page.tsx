@@ -24,14 +24,14 @@ export default async function Equipe() {
         style={{ backgroundColor: "white" }}
       >
         {session && (
-          <div className="w-full px-4 py-1">
+          <div className="max-w-screen-xl  w-full">
             <FormAddMember />
           </div>
         )}
-        {members.map((member, index) => (
+        {members.map((member, index: any) => (
           <MembersContainer
             key={member.id}
-            image={member.image}
+            image={member.image || ""}
             id={member.id}
             name={member.name}
             profession={member.profession}
