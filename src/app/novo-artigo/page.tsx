@@ -13,8 +13,6 @@ export default async function NovoArtigo() {
     },
   });
 
-  // console.log(members.find( member => member.name))
-
   if (!session) {
     return redirect("/");
   }
