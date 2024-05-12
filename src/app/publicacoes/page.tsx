@@ -1,8 +1,7 @@
 import { auth } from "@/../auth";
-import Pagination from "@/components/Pagination/Pagination";
+import { Artigo, Pagination } from "@/components";
 import db from "@/lib/db";
 import Link from "next/link";
-import { Artigo } from "./_component/artigo";
 
 export default async function Publicacoes() {
   const session = await auth();

@@ -1,3 +1,4 @@
+export { Artigo } from "./Artigo/Artigo";
 export { Banner } from "./Banner/Banner";
 export { WhatsAppButton } from "./Button/WhatsAppButton";
 export { ControlledCarousel } from "./ContolledCarousel/ControlledCarousel";
@@ -7,4 +8,5 @@ export { Header } from "./Header/Header";
 export { Logout } from "./Logout/Logout";
 export { Members } from "./Members/Members";
 export { MembersContainer } from "./MembersContainer/MembersContainer";
+export { Pagination } from "./Pagination/Pagination";
 export { BasicMenu } from "./materialUI/BasicMenu";
