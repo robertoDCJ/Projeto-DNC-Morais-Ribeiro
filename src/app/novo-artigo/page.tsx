@@ -6,7 +6,7 @@ import db from "@/lib/db";
 
 export default async function NovoArtigo() {
   const session = await auth();
-  const members = await db.member.findMany({
+  const members  = await db.member.findMany({
     select: {
       id: true,
       name: true,
@@ -14,7 +14,6 @@ export default async function NovoArtigo() {
     }
   });
   
-  // console.log(members.find( member => member.name))
 
   if (!session) {
     return redirect("/");
