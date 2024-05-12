@@ -4,6 +4,7 @@ export { WhatsAppButton } from "./Button/WhatsAppButton";
 export { ControlledCarousel } from "./ContolledCarousel/ControlledCarousel";
 export { Footer } from "./Footer/Footer";
 export { FormAddMember } from "./FormAddMember/FormAddMember";
+export { FormArtigo } from "./FormArtigo/FormArtigo";
 export { Header } from "./Header/Header";
 export { Logout } from "./Logout/Logout";
 export { Members } from "./Members/Members";

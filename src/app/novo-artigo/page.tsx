@@ -1,7 +1,7 @@
 import { auth } from "@/../auth";
+import { FormArtigo } from "@/components";
 import db from "@/lib/db";
 import { redirect } from "next/navigation";
-import { FormArtigo } from "./_formArtigo/formArtigo";
 
 export default async function NovoArtigo() {
   const session = await auth();
