@@ -37,26 +37,27 @@ export default async function Publicacoes() {
 
         <div className="flex justify-center items-center p-4 w-full">
           <div className="flex flex-col w-80 gap-2  items-center max-w-screen-xl md:justify-between md:w-full p-8 md:flex md:flex-row">
-          <h1 className="font-Lato text-3xl text-black font-thin">
-            Artigos
-          </h1>
-          {session && (
-            <Link
-              href={"/novo-artigo"}
-              className="font-Lato text-xl text-black font-thin bg-gray-200 hover:bg-gray-300 py-2 px-3 rounded-lg border border-black outline-2"
-            >
-              Publicar Novo Artigo
-            </Link>
-          )}
+            <h1 className="font-Lato text-3xl text-black font-thin">Artigos</h1>
+            {session && (
+              <Link
+                href={"/novo-artigo"}
+                className="font-Lato text-xl text-black font-thin bg-gray-200 hover:bg-gray-300 py-2 px-3 rounded-lg border border-black outline-2"
+              >
+                Publicar Novo Artigo
+              </Link>
+            )}
           </div>
         </div>
 
         <div className="flex flex-col justify-center items-center p-4">
-          {artigo.map((artigo) => (
+          {artigo.map((artigo, index) => (
             <Artigo
+              key={artigo.id}
               title={artigo.title}
               member={artigo.authorId}
               text={artigo.text}
+              image={artigo.image}
+              line={index}
             />
           ))}
         </div>
