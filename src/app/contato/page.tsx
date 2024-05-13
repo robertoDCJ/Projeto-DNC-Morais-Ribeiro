@@ -1,4 +1,5 @@
 "use client";
+import { list } from "postcss";
 import { useState } from "react";
 
 const Contato = () => {
@@ -11,7 +12,32 @@ const Contato = () => {
   const [otherText, setOtherText] = useState("");
   const [processNumber, setProcessNumber] = useState("");
 
-  const handleSubmit = (e: any) => {
+  const listOne = [
+    "Linkedin",
+    "Indicação",
+    "Google",
+    "Facebook",
+    "Instagram",
+    "Outros",
+  ]
+  const listTwo = [
+
+    "Direito Civil Geral",
+    "Direito de Família",
+    "Direito Tributário",
+    "Direito Empresarial",
+    "Direito do Trabalho",
+    "Direito do Consumidor",
+    "Direito Criminal",
+    "Direito Previdenciário",
+    "Direito Internacional",
+    "Sou parte adversa em um processo (informar número do processo)",
+    "Quero fazer proposta de acordo",
+    "Outro assunto não especificado anteriormente",
+
+  ]
+
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     const formData = {
@@ -25,7 +51,7 @@ const Contato = () => {
       processNumber,
     };
 
-    const requestBody = {
+    const sendEmailRequest = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -33,32 +59,48 @@ const Contato = () => {
       body: JSON.stringify(formData),
     };
 
-    // Simulando envio para um servidor ( back end ainda não foi implementado)
-    fetch("https://servidor-exemplo/enviar-email", requestBody)
-      .then((response) => {
-        if (response.ok) {
-          alert("Mensagem enviada com sucesso!");
-          setName("");
-          setEmail("");
-          setSubject("");
-          setMessage("");
-          setPhone("");
-          setHowFound("");
-          setOtherText("");
-          setProcessNumber("");
-        } else {
-          throw new Error("Erro ao enviar mensagem");
-        }
-      })
-      .catch((error) => {
-        console.error("Erro ao enviar mensagem:", error);
-        alert("Erro ao enviar mensagem! Por favor, tente novamente.");
-      });
-  };
+    const saveToDatabaseRequest = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    };
+
+    try{
+  
+          const emailResponse = await fetch("/api/sendEmail", sendEmailRequest)
+            if (emailResponse.ok){
+                alert("Mensagem enviada com sucesso!");
+                setName("");
+                setEmail("");
+                setSubject("");
+                setMessage("");
+                setPhone("");
+                setHowFound("");
+                setOtherText("");
+                setProcessNumber("");
+            } else {
+              alert("Erro ao enviar mensagem! Por favor, tente novamente.");
+              throw new Error("Erro ao enviar mensagem: Código de estado " + emailResponse.status);
+            }
+          const dbResponse = await fetch("/api/saveEmailToDb", saveToDatabaseRequest)
+            if (!dbResponse.ok){
+            throw new Error("Erro ao salvar no db: Código de estado " + dbResponse.status)
+            }
+
+
+        }catch(error) {
+              console.error(error);
+         };
+}
+
 
   const handleHowFoundChange = (value: any) => {
-    setHowFound(value);
-    if (value !== "6") {
+
+      setHowFound(value);
+
+    if ( value !== listOne[5]) {
       setOtherText("");
     }
   };
@@ -160,15 +202,17 @@ const Contato = () => {
               onChange={(e) => handleHowFoundChange(e.target.value)}
             >
               <option value="">Selecione uma opção</option>
-              <option value="1">Linkedin</option>
-              <option value="2">Indicação</option>
-              <option value="3">Google</option>
-              <option value="4">Facebook</option>
-              <option value="5">Instagram</option>
-              <option value="6">Outros</option>
+
+              {listOne.map((item: string, index: number) => {
+                return (
+                  <option key={index} value={item}>{item}</option>
+              )})}
+                
+            
+             
             </select>
 
-            {howFound === "6" && (
+            {howFound === listOne[5] && (
               <div>
                 <label
                   htmlFor="otherText"
@@ -202,39 +246,27 @@ const Contato = () => {
               required
             >
               <option value="">Selecione uma opção</option>
-              <option value="1">Direito Civil Geral</option>
-              <option value="2">Direito de Família</option>
-              <option value="3">Direito Tributário</option>
-              <option value="4">Direito Empresarial</option>
-              <option value="5">Direito do Trabalho</option>
-              <option value="6">Direito do Consumidor</option>
-              <option value="7">Direito Criminal</option>
-              <option value="8">Direito Previdenciário</option>
-              <option value="9">Direito Internacional</option>
-              <option value="10">
-                Sou parte adversa em um processo (informar número do processo)
-              </option>
-              <option value="11">Quero fazer proposta de acordo</option>
-              <option value="12">
-                Outro assunto não especificado anteriormente
-              </option>
+              {listTwo.map((item: string, index: number) => {
+                return (
+                  <option key={index} value={item}>{item}</option>
+              )})}
             </select>
 
-            {(subject === "10" || subject === "12") && (
+            {(subject === listTwo[9] || subject === listTwo[11]) && (
               <div>
                 <label
                   htmlFor="additionalInfo"
                   className="block mt-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                 >
-                  {subject === "10" ? "Número do Processo" : "Outro Assunto"}
+                  {subject === listTwo[9] ? "Número do Processo" : "Outro Assunto"}
                 </label>
                 <input
                   type="text"
                   id="additionalInfo"
                   className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
-                  value={subject === "10" ? processNumber : otherText}
+                  value={subject === listTwo[9] ? processNumber : otherText}
                   onChange={(e) =>
-                    subject === "10"
+                    subject === listTwo[9]
                       ? setProcessNumber(e.target.value)
                       : setOtherText(e.target.value)
                   }
