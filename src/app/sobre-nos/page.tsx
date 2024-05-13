@@ -1,23 +1,11 @@
 'use client'
-import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { useResize } from "@/components/UseResize/useResize";
 
 export default function SobreNos() {
-  const [isAnimationActive, setIsAnimationActive] = useState(false);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsAnimationActive(window.innerWidth <= 600);
-    };
-
-    window.addEventListener("resize", handleResize);
-    handleResize();
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
+  const isAnimationActive = useResize();
+  
   return (
     <div className="flex flex-col justify-center">
       <div

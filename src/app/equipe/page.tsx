@@ -1,24 +1,17 @@
 import { FormAddMember, MembersContainer } from "@/components";
+
 import db from "@/lib/db";
 import { auth } from "../../../auth";
+import { HeaderEquipe } from "@/components/HeaderEquipe/headerEquipe";
 
 export default async function Equipe() {
+
   const members = await db.member.findMany();
   const session = await auth();
 
   return (
     <div className="relative">
-      <div
-        className="grid place-items-center  bg-cover  bg-top "
-        style={{
-          backgroundImage: "url('/ImgSobreNos/Equipe.svg')",
-          height: "659px",
-        }}
-      >
-        <div className="grid grid-cols-2 place-items-center w-full max-w-screen-xl">
-          <h1 className="font-Alegreya font-bold text-5xl">Equipe</h1>
-        </div>
-      </div>
+      <HeaderEquipe/>
       <div
         className="grid place-items-center"
         style={{ backgroundColor: "white" }}

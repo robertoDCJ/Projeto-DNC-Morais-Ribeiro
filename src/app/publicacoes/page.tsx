@@ -12,17 +12,17 @@ export default async function Publicacoes() {
       <main className="bg-gray-200 w-full">
         <div className="flex flex-col justify-center ">
           <div
-            className={"flex justify-center"}
+            className="flex justify-center"
             style={{
               backgroundImage: "url('/ImgPublicacoes/publicacoes.svg')",
               height: "359px",
               backgroundSize: "cover",
               backgroundRepeat: "no-repeat",
-              backgroundPosition: "center",
+              backgroundPosition: "bottom",
             }}
           >
             <div className="grid grid-cols-1 justify-start items-center max-w-screen-xl w-full">
-              <div className="flex flex-col max-w-2xl w-full p-5">
+              <div className="flex flex-col max-w-md w-full p-5">
                 <h1 className="font-Lato md:text-3xl text-xl font-bold">
                   PUBLICAÇÕES
                 </h1>
@@ -56,6 +56,7 @@ export default async function Publicacoes() {
               member={artigo.authorId}
               text={artigo.text}
               image={artigo.image}
+              datePublication={artigo.datePublication}
               line={index}
             />
           ))}

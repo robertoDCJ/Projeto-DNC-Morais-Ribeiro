@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 
 export const FormAddMember = () => {
   const [message, setMessage] = useState<string | null>("");
-  const { register, handleSubmit } = useForm<Member>({});
+  const { register, handleSubmit, reset } = useForm<Member>({});
   const [img, setImg] = useState<string | File>("");
   const [handdleAddMember, setHanddleAddMember] = useState<boolean>(false);
   const [fotoURL, setFotoURL] = useState<string | null>(
@@ -34,6 +34,10 @@ export const FormAddMember = () => {
         setMessage(data.msg);
         setTimeout(() => {
           setMessage("");
+          setFotoURL("/ImgMembers/Background.svg");
+          setImg("");
+          reset();
+
         }, 3000);
       } else {
         const data = await response.json();

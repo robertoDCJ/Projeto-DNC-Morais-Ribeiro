@@ -1,24 +1,25 @@
 export default function Privacidade() {
   return (
-    <>
       <main className="bg-gray-200">
         <div className="flex flex-col justify-center">
           <div
-            className={"flex justify-start"}
+            className={"flex justify-start items-center"}
             style={{
               backgroundImage: "url('/ImgPrivacidade/privacidade.svg')",
-              height: "259px",
+              height: "359px",
               backgroundSize: "cover",
               backgroundRepeat: "no-repeat",
-              backgroundPosition: "center",
+              backgroundPosition: "bottom",
             }}
           >
-            <div className="flex md:w-456 md:justify-start justify-center items-center w-full">
-              <div className="flex flex-col md:w-456  w-full md:px-8 px-4">
+            <div className="flex justify-center w-full">
+              <div className="flex flex-col justify-center md:justify-start  max-w-screen-xl  w-full p-8">
+                <div className="md:w-456 w-full">
                 <h1 className="font-Lato md:text-3xl text-xl ml-12 font-bold ">
                   PRIVACIDADE
                 </h1>
                 <div className="border border-white my-3 ml-12 antialiased" />
+                </div>
               </div>
             </div>
           </div>
@@ -31,7 +32,7 @@ export default function Privacidade() {
         </div>
         <div className="max-w-3xl mx-auto py-8 px-4">
           <p className="text-xl text-gray-800 leading-relaxed">
-              1.Na Morais & Ribeiro Advocacia e Consultoria Jurídica, 
+              1. Na Morais & Ribeiro Advocacia e Consultoria Jurídica, 
               levamos a privacidade e a segurança dos dados de nossos clientes muito a sério. 
               Esta Política de Privacidade descreve como coletamos, usamos e protegemos suas informações pessoais.
           </p>
@@ -66,6 +67,6 @@ export default function Privacidade() {
           </div>
         </div>
       </main>
-    </>
+
   );
 }

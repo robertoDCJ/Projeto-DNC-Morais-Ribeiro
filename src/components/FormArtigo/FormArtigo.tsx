@@ -6,8 +6,8 @@ import { useForm } from "react-hook-form";
 
 export const FormArtigo = ({ members }: { members: any[] }) => {
   const [userSelected, setUserSelected] = useState<string>("");
-  const { register, handleSubmit, watch } = useForm<Post>({});
-  const [img, setImg] = useState<File>();
+  const { register, handleSubmit, watch, reset} = useForm<Post>({});
+  const [img, setImg] = useState<File | null>(null);
 
   const onSubmit = handleSubmit(async (data) => {
     try {
@@ -22,6 +22,12 @@ export const FormArtigo = ({ members }: { members: any[] }) => {
         method: "POST",
         body: form,
       });
+
+      if (response.ok){
+        setImg(null);
+        reset();
+        setUserSelected("");
+      }
 
       return alert((await response.json()).msg);
     } catch (error) {

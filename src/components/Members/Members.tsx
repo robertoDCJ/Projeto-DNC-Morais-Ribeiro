@@ -1,5 +1,5 @@
 "use client";
-
+import { ConfirmationModal } from "../ConfirmatioModal/confirmationModal";
 import { ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -24,6 +24,7 @@ export const Members = ({
   linkedin: string;
   session: string | undefined;
 }) => {
+  const [showModal, setShowModal] = useState(false);
   const [img, setImg] = useState<string | File>(image);
   const [message, setMessage] = useState<string | null>("");
   const [handdleEditar, setHanddleEditar] = useState<boolean>(false);
@@ -91,6 +92,7 @@ export const Members = ({
       if (response.ok) {
         const data = await response.json();
         setMessage(data.msg);
+        setShowModal(false);
         setTimeout(() => {
           setMessage(null);
         }, 3000);
@@ -244,12 +246,19 @@ export const Members = ({
 
               <button
                 className="bg-black rounded-md  text-white font-Alegreya  py-2 px-4 transition-all duration-500 hover:-translate-y-2"
-                onClick={onDelete}
+                onClick={() => setShowModal(true)}
               >
                 Remover
               </button>
             </div>
           )}
+          {showModal && 
+          <ConfirmationModal
+          message="¿Você deseja realmente deseja realizar esta ação?"
+          onConfirm={onDelete}
+          onCancel={() => {setShowModal(false)}}
+          />
+          }
 
           <h1 className="font-Alegreya font-bold text-2xl border-b-2 mb-5 border-black">
             {name}
