@@ -7,7 +7,7 @@ export const WhatsAppButton = () => {
   };
 
   return (
-    <div className={styles.whatsappButton} onClick={handleWhatsAppClick}>
+    <div className="fixed right-5 bottom-5 cursor-pointer" onClick={handleWhatsAppClick}>
       <img
         className="hover:shadow-md transition duration-300 ease-in-out transform hover:-translate-y-6 hover:scale-105 cursor-pointer"
         src="/WhatsApp_icon.png"
