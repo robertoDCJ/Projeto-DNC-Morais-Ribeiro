@@ -35,3 +35,16 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Imagenes na pasta public/uploads e public/uploadsArtigos
+public/uploads/*.jpeg
+public/uploads/*.jpg
+public/uploads/*.svg
+public/uploads/*.png
+
+public/uploadsArtigos/*.jpeg
+public/uploadsArtigos/*.jpg
+public/uploadsArtigos/*.svg
+public/uploadsArtigos/*.png
+
+
