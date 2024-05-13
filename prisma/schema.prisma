@@ -39,3 +39,16 @@ model Member {
   image  String
   Post   Post[]
 }
+
+model Contact {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  email String
+  subject String
+  message String
+  phone String?
+  howFound String?
+  otherText String?
+  processNumber String?
+}
+
