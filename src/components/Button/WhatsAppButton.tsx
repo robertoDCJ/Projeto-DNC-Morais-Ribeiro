@@ -1,5 +1,4 @@
 "use client";
-import styles from "./WhatsAppButton.module.css";
 
 export const WhatsAppButton = () => {
   const handleWhatsAppClick = () => {
